@@ -28,6 +28,7 @@ void Game::init()
 	x_updateFPS.setPosition(sf::Vector2f{20.0f,300.0f});
 	x_updateFPS.setCharacterSize(24);
 	x_updateFPS.setFillColor(sf::Color::White);
+	//frames per second 
 	x_drawFPS.setFont(m_arialFont);
 	x_drawFPS.setPosition(sf::Vector2f{ 20.0f,350.0f });
 	x_drawFPS.setCharacterSize(24);
@@ -116,14 +117,13 @@ void Game::processKeyPressed(const std::optional<sf::Event>& t_event)
 
 }
 
-
-
 ////////////////////////////////////////////////////////////
 void Game::update(double dt)
 {
-	m_thief.update(dt);
-	m_guard.update(dt);
-	m_guard.LRMovement();
+	m_thief.update(dt);//updates the thief
+	m_guard.update(dt);//updates the guard
+	m_guard.LRMovement();//moves the first guard left and right
+	m_scentTrail.update(dt, m_thief.getPosition());//updates the bubbles to the thiefs position
 }
 
 
@@ -132,13 +132,15 @@ void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0, 0));
 #ifdef TEST_FPS
-	m_window.draw(m_bgSprite);
-	m_window.draw(x_updateFPS);
-	m_window.draw(x_drawFPS);
+	m_window.draw(m_bgSprite);//draws the background sprite (its on top so it draws under the other sprites) 
+	m_window.draw(x_updateFPS);//updates fps message
+	m_window.draw(x_drawFPS);//draws fps message
 	
 #endif
-	m_thief.render(m_window);
-	m_guard.render(m_window);
+	m_thief.render(m_window);//draws the thief
+	m_guard.render(m_window);//draws the guards
+	m_scentTrail.render(m_window);//draws each bubble
+
 	m_window.display();
 	
 	

@@ -14,6 +14,7 @@
 #include "Thief.h"
 #include "Guard.h"
 #include "ScreenSize.h"
+#include "ScentTrail.h"
 
 
 /// <summary>
@@ -84,10 +85,12 @@ protected:
 	sf::RenderWindow m_window;
 	Thief m_thief;
 	Guard m_guard;
+	ScentTrail m_scentTrail;
+	
+	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };//gets the sprite for the background
+	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 
 
 	
-	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };
-	sf::Sprite m_bgSprite{ m_bgTexture };
 
 	//std::vector<sf::Sprite> m_wallSprites;
 	//sf::Texture m_BlankTexture{ "ResourceFiles/Images/check.jpg" };//loads blank texture
@@ -100,6 +103,6 @@ protected:
 	int x_updateFrameCount{ 0 };			// updates per second counter.
 	int x_drawFrameCount{ 0 };				// draws per second counter.
 
-
+	static const int TOTAL_PARTICLES = 6;//set the total number of particles
 
 };

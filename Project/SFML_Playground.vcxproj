@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Guard.cpp" />
+    <ClCompile Include="ScentTrail.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="Thief.cpp" />
@@ -28,6 +29,7 @@
     <ClInclude Include="Guard.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\ScreenSize.h" />
+    <ClInclude Include="ScentTrail.h" />
     <ClInclude Include="Thief.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
