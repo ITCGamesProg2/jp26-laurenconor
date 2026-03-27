@@ -20,6 +20,7 @@ void Game::init()
 	{
 		std::cerr<< "error ";
 	}
+	
 
 #ifdef TEST_FPS
 
@@ -121,6 +122,8 @@ void Game::processKeyPressed(const std::optional<sf::Event>& t_event)
 void Game::update(double dt)
 {
 	m_thief.update(dt);
+	m_guard.update(dt);
+	m_guard.LRMovement();
 }
 
 
@@ -129,11 +132,13 @@ void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0, 0));
 #ifdef TEST_FPS
+	m_window.draw(m_bgSprite);
 	m_window.draw(x_updateFPS);
 	m_window.draw(x_drawFPS);
 	
 #endif
 	m_thief.render(m_window);
+	m_guard.render(m_window);
 	m_window.display();
 	
 	

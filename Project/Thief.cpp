@@ -9,7 +9,6 @@ Thief::Thief()
 void Thief::update(double dt)
 {
 	handleKeyInput();
-
 }
 
 

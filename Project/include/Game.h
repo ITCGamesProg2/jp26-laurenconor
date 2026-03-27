@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Thief.h"
+#include "Guard.h"
 #include "ScreenSize.h"
 
 
@@ -82,8 +83,11 @@ protected:
 	// main window
 	sf::RenderWindow m_window;
 	Thief m_thief;
+	Guard m_guard;
 
-
+	
+	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };
+	sf::Sprite m_bgSprite{ m_bgTexture };
 
 	//std::vector<sf::Sprite> m_wallSprites;
 	//sf::Texture m_BlankTexture{ "ResourceFiles/Images/check.jpg" };//loads blank texture
