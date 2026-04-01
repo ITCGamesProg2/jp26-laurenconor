@@ -24,6 +24,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="Thief.cpp" />
+    <ClCompile Include="VisionCone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Guard.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="include\ScreenSize.h" />
     <ClInclude Include="ScentTrail.h" />
     <ClInclude Include="Thief.h" />
+    <ClInclude Include="VisionCone.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F10133B9-852C-4A93-A994-DC0D1C009AD5}</ProjectGuid>

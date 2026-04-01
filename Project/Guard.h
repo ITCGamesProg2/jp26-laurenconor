@@ -24,6 +24,7 @@ public:
 
 private:
 	
+
 	enum class GuardDirection { UP, DOWN, LEFT, RIGHT };
 	GuardDirection m_direction{ GuardDirection::LEFT };//initalises the direction to left
 

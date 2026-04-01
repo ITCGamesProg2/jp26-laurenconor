@@ -15,6 +15,7 @@
 #include "Guard.h"
 #include "ScreenSize.h"
 #include "ScentTrail.h"
+#include "VisionCone.h"
 
 
 /// <summary>
@@ -79,6 +80,7 @@ protected:
 	void processKeyPressed(const std::optional<sf::Event>& t_event);
 
 	
+
 	// Font used for all text
 	sf::Font m_arialFont;
 	// main window
@@ -86,6 +88,7 @@ protected:
 	Thief m_thief;
 	Guard m_guard;
 	ScentTrail m_scentTrail;
+	VisionCone m_cone;
 	
 	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };//gets the sprite for the background
 	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 

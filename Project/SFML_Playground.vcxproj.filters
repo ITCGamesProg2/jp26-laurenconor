@@ -31,6 +31,9 @@
     <ClCompile Include="ScentTrail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VisionCone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -46,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ScentTrail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisionCone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
