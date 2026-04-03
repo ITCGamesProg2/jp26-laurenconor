@@ -121,10 +121,17 @@ void Game::processKeyPressed(const std::optional<sf::Event>& t_event)
 void Game::update(double dt)
 {
 	m_thief.update(dt);//updates the thief
+
 	m_guard.update(dt);//updates the guard
+	m_guardTwo.update(dt);
+
 	m_guard.LRMovement();//moves the first guard left and right
+	m_guardTwo.UDMovement();
+
 	m_scentTrail.update(dt, m_thief.getPosition());//updates the bubbles to the thiefs position
-	
+
+	m_cone.update(dt, m_guard.getPosition());
+	m_coneTwo.update(dt, m_guardTwo.getPosition());
 }
 
 
@@ -139,25 +146,15 @@ void Game::render()
 	
 #endif
 	m_thief.render(m_window);//draws the thief
+
 	m_guard.render(m_window);//draws the guards
+	m_guardTwo.render(m_window);
+
 	m_scentTrail.render(m_window);//draws each bubble
+
 	m_cone.render(m_window);
+	m_coneTwo.render(m_window);
 
-	m_window.display();
-	
-	
+	m_window.display();	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

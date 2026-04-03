@@ -1,25 +1,25 @@
 #include "Guard.h"
 #include <iostream>
 
-Guard::Guard()
+Guard::Guard(sf::Vector2f startPos, GuardDirection startDir) : m_direction(startDir)
 {
-	initSprites();
+	initSprites(startPos);
 }
 
 void Guard::update(double dt)
 {
-	
+	LRMovement();
 	movement();
 	
 }
 
 
 
-void Guard::initSprites()//gets the basic rectangle for now since its easier and i can focus more on the coding , will add the sprite later 
+void Guard::initSprites(sf::Vector2f startPos)//gets the basic rectangle for now since its easier and i can focus more on the coding , will add the sprite later 
 {
 	m_guard.setFillColor(sf::Color::Red);
 	m_guard.setSize(sf::Vector2f{ 30,70 });
-	m_guard.setPosition(sf::Vector2f{ 600,70 });
+	m_guard.setPosition(startPos);
 
 
 }
@@ -36,9 +36,11 @@ void Guard::movement()//gets movment for each direction
 	{
 	case GuardDirection::DOWN:
 		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x ,m_guard.getPosition().y + 1 }); //moves guard down
+		//down == true;
 		break;
 	case GuardDirection::UP:
 		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x  ,m_guard.getPosition().y - 1 });//moves guard up
+		// == true;
 		break;
 	case GuardDirection::LEFT:
 		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x - 1,  m_guard.getPosition().y });//moves guard left
@@ -57,12 +59,44 @@ void Guard::LRMovement()//moves the guard in specific patterns - left and right 
 	if (m_direction == GuardDirection::LEFT && m_guard.getPosition().x <= 0)
 	{
 		m_direction = GuardDirection::RIGHT;//if player is at the very left of the screen, it starts moving in the opposite direction which is right 
+		left = false;
+		
 	}
 	if (m_direction == GuardDirection::RIGHT && m_guard.getPosition().x + 30 >= 1440)
 	{
 		m_direction = GuardDirection::LEFT;//if player is at the right of the screen it will move in the left direction once again
+		left = true;
+		
+	
+	}
+}
+
+void Guard::UDMovement()
+{
+	if (m_direction == GuardDirection::UP && m_guard.getPosition().y <= 0)
+	{
+		m_direction = GuardDirection::DOWN;//if player is at the very left of the screen, it starts moving in the opposite direction which is right 
+		down = true;
+	}
+	
+	if (m_direction == GuardDirection::DOWN && m_guard.getPosition().y + 70 >= 900)
+	{
+		m_direction = GuardDirection::UP;//if player is at the right of the screen it will move in the left direction once again
+		down = false;
 	}
 
+}
+
+bool Guard::movingLeft()
+{
+
+	return left;
+}
+
+bool Guard::movingDown()
+{
+
+	return down;
 }
 
 void Guard::setPosition(sf::Vector2f t_position) //we can call this to set the position in the game class or another class we might need later

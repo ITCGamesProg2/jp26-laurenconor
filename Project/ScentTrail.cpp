@@ -26,26 +26,7 @@ void ScentTrail::setParticlePos(double dt, sf::Vector2f thiefPos)//passes the ti
 			m_particles[parNum].setFillColor(sf::Color::White);//resets color to white when it respawns since the colour had faded 
 		}
 
-		//movement constantly moves the bubbles instead of just placing
-
-		//if (parPos.x < thiefPos.x)//moves particles right
-		//{
-		//	m_particles[parNum].setPosition(sf::Vector2f{ m_particles[parNum].getPosition().x + 1,  m_particles[parNum].getPosition().y });
-		//}
-		//else if (parPos.x > thiefPos.x)//moves particles left 
-		//{
-		//	m_particles[parNum].setPosition(sf::Vector2f{ m_particles[parNum].getPosition().x - 1,  m_particles[parNum].getPosition().y });
-		//}
-
-		//if (parPos.y < thiefPos.y)//moves particles down
-		//{
-		//	m_particles[parNum].setPosition(sf::Vector2f{ m_particles[parNum].getPosition().x  ,m_particles[parNum].getPosition().y - 1 });
-		//}
-		//else if (parPos.y > thiefPos.y)//moves particles up
-		//{
-		//	m_particles[parNum].setPosition(sf::Vector2f{ m_particles[parNum].getPosition().x ,m_particles[parNum].getPosition().y + 1 });
-		//}
-
+		
 		float time = m_particleLifetime[parNum] / MAX_LIFETIME; //divides the seconds the specific bubble has been alive and divides it by the max lifetime of a bubble
 		sf::Color col = m_particles[parNum].getFillColor();//gets the fill colour of the bubble
 		col.a = static_cast<unsigned char>(time * 255.0f);//we reduce the colours alpha on the bubble overtime 
