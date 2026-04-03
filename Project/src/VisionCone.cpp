@@ -20,17 +20,9 @@ void VisionCone::update(double dt, sf::Vector2f thiefPos)
 
 void VisionCone::initCone()
 {
-	m_cone.setPointCount(5);
-
-	m_cone.setPoint(0, { 0.f,0.f });
-	m_cone.setPoint(1, { 120.f,30.f });
-	m_cone.setPoint(2, { 100.f,60.f });
-	m_cone.setPoint(3, { 80.f,80.f });
-	m_cone.setPoint(4, { 50.f,100.f });
 	
-	m_cone.setFillColor(sf::Color::Yellow);//{ 355.0f,355.0f,102.0f,155.0f });
-	m_cone.setPosition({ 200.0f, 500.0f });
-	
+	m_cone.setFillColor({ 255,100,50,155 });
+	m_cone.setPosition(sf::Vector2f( 200,500 ));
 }
 
 void VisionCone::render(sf::RenderWindow& window)
