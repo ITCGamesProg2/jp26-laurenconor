@@ -2,7 +2,7 @@
 #include "Guard.h"
 
 
-VisionCone::VisionCone(Guard & guard) : m_guard(guard)
+VisionCone::VisionCone(Guard & guard, ScentTrail& trail) : m_guard(guard), m_trail(trail)
 {
 	initCone();//gets the position, size and colour of the bubbles
 }
@@ -11,6 +11,10 @@ void VisionCone::update(double dt, sf::Vector2f guardPos)
 {
 	//leaveTrail();
 	setConePos(dt,guardPos);//updates the bubbles to the thiefs position 
+	/*if (trailCollision())
+	{*/
+		handleCollision();
+	//}
 }
 
 void VisionCone::setConePos(double dt, sf::Vector2f guardPos)//passes the time and the position of the thief
@@ -29,7 +33,6 @@ void VisionCone::updateConeDirection()
 		m_cone.setPoint(2, { -100.f,60.f });
 		m_cone.setPoint(3, { -80.f,80.f });
 		m_cone.setPoint(4, { -50.f,100.f });
-		m_cone.setFillColor({ 255,255,102,155});
 	}
 	else
 	{
@@ -38,14 +41,8 @@ void VisionCone::updateConeDirection()
 		m_cone.setPoint(2, { 100.f,60.f });
 		m_cone.setPoint(3, { 80.f,80.f });
 		m_cone.setPoint(4, { 50.f,100.f });
-		m_cone.setFillColor({ 255,255,102,155 });
+		m_cone.setFillColor({ 102,255,102,155 });
 	}
-
-	/*if (m_guard.movingDown())
-	{
-
-	}*/
-
 }
 
 void VisionCone::initCone()
@@ -58,4 +55,29 @@ void VisionCone::initCone()
 void VisionCone::render(sf::RenderWindow& window)
 {
 	window.draw(m_cone);
+}
+
+bool VisionCone::trailCollision()
+{
+	return m_trail.intersects(m_cone.getGlobalBounds());
+}
+
+void VisionCone::handleCollision()
+{
+	if (m_state == VisionState::SEARCHING)
+	{
+		m_cone.setFillColor({ 102,255,102,155 });
+	}
+	else if (m_state == VisionState::ALERT)
+	{
+		m_cone.setFillColor({ 255,255,102,155 });
+	}
+	else if (m_state == VisionState::PERSUING)
+	{
+		m_cone.setFillColor({ 255,152,102,155 });
+	}
+	else if(m_state == VisionState::ATTACKING)
+	{ 
+		m_cone.setFillColor({ 255,0,0,155 });
+	}
 }

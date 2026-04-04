@@ -54,3 +54,25 @@ void ScentTrail::render(sf::RenderWindow& window)
 		window.draw(m_particles[parNum]);//draws the individual bubbles
 	}
 }
+
+bool ScentTrail::intersects(const sf::FloatRect& rect) const
+{
+	std::cout << "Checking"<<std::endl;
+	for (int parNum = 0; parNum < TOTAL_PARTICLES; parNum++)
+	{
+		std::cout << "for loop" << std::endl;
+		if (m_particles[parNum].getFillColor().a == 0)
+		{	
+			continue;
+		}
+		if (m_particles[parNum].getGlobalBounds().findIntersection(rect))
+		{
+			std::cout << "there is collision Checking" << std::endl;
+			return true;
+		}
+
+	}
+	
+	return false;
+}
+
