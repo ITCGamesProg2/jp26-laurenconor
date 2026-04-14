@@ -89,8 +89,8 @@ protected:
 	Guard m_guard{ sf::Vector2f{600,70}, Guard::GuardDirection::LEFT };
 	Guard m_guardTwo{ sf::Vector2f{200,400}, Guard::GuardDirection::DOWN };
 	ScentTrail m_scentTrail;
-	VisionCone m_cone{ m_guard, m_scentTrail };
-	VisionCone m_coneTwo{ m_guardTwo ,m_scentTrail };
+	VisionCone m_cone{ m_guard, m_scentTrail, m_thief };
+	VisionCone m_coneTwo{ m_guardTwo ,m_scentTrail,m_thief };
 	
 	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };//gets the sprite for the background
 	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 

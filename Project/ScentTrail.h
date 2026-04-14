@@ -15,6 +15,7 @@ public:
 	//sf::FloatRect globalBounds();
 	bool intersects(const sf::FloatRect& rect) const;
 	
+
 private:
 	static const int TOTAL_PARTICLES = 6;//set the total number of particles
 	sf::CircleShape m_particles[TOTAL_PARTICLES];// = TOTAL_PARTICLES; //get the total number of particles

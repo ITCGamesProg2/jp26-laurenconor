@@ -29,6 +29,10 @@ public:
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
 
+	sf::FloatRect Guard::returnBounds();
+
+	bool Guard::intersects(const sf::FloatRect& rect) const;
+
 private:
 	
 	bool left = true;

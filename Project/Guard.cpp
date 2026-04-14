@@ -21,11 +21,10 @@ void Guard::initSprites(sf::Vector2f startPos)//gets the basic rectangle for now
 	m_guard.setSize(sf::Vector2f{ 30,70 });
 	m_guard.setPosition(startPos);
 
-
+	
 }
 void Guard::render(sf::RenderWindow& window)
 {
-
 	window.draw(m_guard);
 }
 
@@ -101,10 +100,27 @@ bool Guard::movingDown()
 
 void Guard::setPosition(sf::Vector2f t_position) //we can call this to set the position in the game class or another class we might need later
 {
+
 	m_guard.setPosition(t_position);
 }
 
 sf::Vector2f Guard::getPosition() const//can be used in game later for collision etc
 {
 	return m_guard.getPosition();
+}
+
+
+bool Guard::intersects(const sf::FloatRect& rect) const
+{
+		
+		if (m_guard.getGlobalBounds().findIntersection(rect))
+		{
+			return true;
+		}
+
+}
+
+sf::FloatRect Guard::returnBounds()
+{
+	return m_guard.getGlobalBounds();
 }

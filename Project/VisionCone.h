@@ -9,23 +9,26 @@
 
 class VisionCone {
 public:
-	VisionCone(Guard& guard, ScentTrail& trail);
+	VisionCone(Guard& guard, ScentTrail& trail, Thief& thief);
 	void initCone(sf::Vector2f guardPos);//get size, colour and position of bubbles
 	//void leaveTrail();
 	void update(double dt, sf::Vector2f guardPos);//updates every 60th of a second
 	void setConePos(double dt, sf::Vector2f guardPos);//sets position of particles and gets the timer for each bubble
 	void render(sf::RenderWindow& window);
-	//bool trailCollision();
+	bool trailCollision();
 	void handleCollision();
+	void checkCollision();
+//	void handleCollision();
 
 private:
 	sf::VertexArray m_cone;
 	void updateConeDirection(sf::Vector2f guardPos);
 
 	Guard &m_guard;
+	Thief& m_thief;
 	ScentTrail& m_trail;
 	enum class VisionState {SEARCHING, ALERT, PERSUING, ATTACKING};
-	VisionState m_state{ VisionState::PERSUING };
+	VisionState m_state{ VisionState::SEARCHING };
 	sf::Color m_color;
 	const int pointCount = 20;
 	float fieldOfView = 40.0f;

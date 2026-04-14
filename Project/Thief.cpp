@@ -57,3 +57,9 @@ sf::Vector2f Thief::getPosition() const//gets positon so we can use it in the ga
 {
 	return m_thief.getPosition();
 }
+
+
+sf::FloatRect Thief::returnBounds()
+{
+	return m_thief.getGlobalBounds();
+}

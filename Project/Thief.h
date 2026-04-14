@@ -19,6 +19,9 @@ public:
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
 
+	sf::FloatRect Thief::returnBounds();
+	
+
 private:
 
 	double m_speed{ 0.0f };//speed for thief
