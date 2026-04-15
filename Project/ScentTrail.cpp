@@ -40,7 +40,7 @@ void ScentTrail::initParticles()
 	for (int parNum = 0; parNum < TOTAL_PARTICLES; parNum++)
 	{
 		m_particles[parNum].setFillColor({ sf::Color::White });//gets the colour of the bubble at the start of its life
-		m_particles[parNum].setPosition({400,70});//makes sure the bubble starts exactly where the thief/ player starts
+		m_particles[parNum].setPosition({10,70});//makes sure the bubble starts exactly where the thief/ player starts
 		m_particles[parNum].setRadius(10.0f);//sets radius/ size of bubble 
 		m_particleLifetime[parNum] = MAX_LIFETIME* ((float)parNum / TOTAL_PARTICLES);//to get the remainding lifetime of a specific bubble we multiply the max 
 																					 //lifetime by the specific bubble divided by the total particles (starts the timer)

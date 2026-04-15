@@ -132,6 +132,10 @@ void Game::update(double dt)
 
 	m_cone.update(dt, m_guard.getPosition());
 	m_coneTwo.update(dt, m_guardTwo.getPosition());
+
+	m_itemOne.update(dt);
+	m_itemTwo.update(dt);
+	m_itemThree.update(dt);
 }
 
 
@@ -154,6 +158,10 @@ void Game::render()
 
 	m_cone.render(m_window);
 	m_coneTwo.render(m_window);
+
+	m_itemOne.render(m_window);
+	m_itemTwo.render(m_window);
+	m_itemThree.render(m_window);
 
 	m_window.display();	
 }

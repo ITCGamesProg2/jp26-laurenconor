@@ -18,6 +18,8 @@ public:
 	//gets and sets position to be used by the scentTrail class
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
+	void boundChecking();
+
 
 	sf::FloatRect Thief::returnBounds();
 	

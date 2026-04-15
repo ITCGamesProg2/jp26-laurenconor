@@ -16,6 +16,7 @@
 #include "ScreenSize.h"
 #include "ScentTrail.h"
 #include "VisionCone.h"
+#include "Items.h"
 
 
 /// <summary>
@@ -92,6 +93,10 @@ protected:
 	VisionCone m_cone{ m_guard, m_scentTrail, m_thief };
 	VisionCone m_coneTwo{ m_guardTwo ,m_scentTrail,m_thief };
 	
+	Items m_itemOne{ sf::Vector2f{ 650,175 } };//top box
+	Items m_itemTwo{ sf::Vector2f{ 100,350 } };
+	Items m_itemThree{ sf::Vector2f{400,700} };
+
 	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };//gets the sprite for the background
 	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 
 
