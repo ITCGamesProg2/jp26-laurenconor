@@ -99,7 +99,11 @@ void VisionCone::checkCollision()
 	}
 	if (m_trail.intersects(m_guard.returnBounds()))
 	{
+		m_guard.setChasing(true);
 		m_state = VisionState::PERSUING;
+	}
+	else {
+		m_guard.setChasing(false);
 	}
 	if (m_guard.intersects(m_thief.returnBounds()))
 	{

@@ -122,8 +122,8 @@ void Game::update(double dt)
 {
 	m_thief.update(dt);//updates the thief
 
-	m_guard.update(dt);//updates the guard
-	m_guardTwo.update(dt);
+	m_guard.update(dt, m_thief.getPosition());//updates the guard
+	m_guardTwo.update(dt, m_thief.getPosition());
 
 	m_guard.LRMovement();//moves the first guard left and right
 	m_guardTwo.UDMovement();

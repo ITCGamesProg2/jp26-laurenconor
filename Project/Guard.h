@@ -10,7 +10,7 @@ public:
 
 	Guard(sf::Vector2f startPos = sf::Vector2f{ 600,70 }, GuardDirection startDir = GuardDirection::LEFT);
 	
-	void Guard::update(double dt);//updates the thief
+	void Guard::update(double dt, sf::Vector2f thiefPos);//updates the thief
 
 
 	void Guard::render(sf::RenderWindow& window);//renders the sprite
@@ -33,10 +33,16 @@ public:
 
 	bool Guard::intersects(const sf::FloatRect& rect) const;
 
+	void setChasing(bool chasing);
+	void chaseTarget(sf::Vector2f targetPos, double dt);
+
+
 private:
 	
 	bool left = true;
 	bool down = true;
+
+	bool m_isChasing = false;
 
 	GuardDirection m_direction;//initalises the direction to left
 

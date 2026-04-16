@@ -6,10 +6,17 @@ Guard::Guard(sf::Vector2f startPos, GuardDirection startDir) : m_direction(start
 	initSprites(startPos);
 }
 
-void Guard::update(double dt)
+void Guard::update(double dt, sf::Vector2f thiefPos)
 {
-	LRMovement();
-	movement();
+	if (m_isChasing)
+	{
+		chaseTarget(thiefPos, dt);
+	}
+	else
+	{
+		LRMovement();
+		movement();
+	}
 	
 }
 
@@ -118,6 +125,29 @@ bool Guard::intersects(const sf::FloatRect& rect) const
 			return true;
 		}
 
+	return false;
+}
+
+void Guard::setChasing(bool chasing)
+{
+	m_isChasing = chasing;
+
+}
+
+void Guard::chaseTarget(sf::Vector2f targetPos, double dt)
+{
+	sf::Vector2f guardPos = m_guard.getPosition();
+	sf::Vector2f direction = targetPos - guardPos;
+
+	float length = std::sqrt(direction.x * direction.x + direction.y * direction.y); //getting length of vector so we can normalise it and use it
+
+	if (length > 0.0f)
+	{
+		direction /= length;//normalise (moves smoother)
+	}
+
+	float chaseSpeed = 2.0f;
+	m_guard.setPosition(guardPos + direction * chaseSpeed);
 }
 
 sf::FloatRect Guard::returnBounds()
