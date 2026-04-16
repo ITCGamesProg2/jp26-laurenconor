@@ -1,17 +1,20 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+enum class GuardDirection {LEFT,RIGHT,UP,DOWN};
 
 class Guard
 {
 public:
-	enum class GuardDirection {UP,DOWN,LEFT,RIGHT};
 
 
 	Guard(sf::Vector2f startPos = sf::Vector2f{ 600,70 }, GuardDirection startDir = GuardDirection::LEFT);
 	
 	void Guard::update(double dt, sf::Vector2f thiefPos);//updates the thief
 
+	GuardDirection getDirection() const {
+		return m_direction;
+	};
 
 	void Guard::render(sf::RenderWindow& window);//renders the sprite
 

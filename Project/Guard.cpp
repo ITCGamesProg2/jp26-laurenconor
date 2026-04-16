@@ -20,6 +20,11 @@ void Guard::update(double dt, sf::Vector2f thiefPos)
 	
 }
 
+//Guard::getDirection() const
+//{
+//	return m_direction;
+//}
+
 
 
 void Guard::initSprites(sf::Vector2f startPos)//gets the basic rectangle for now since its easier and i can focus more on the coding , will add the sprite later 
@@ -146,7 +151,7 @@ void Guard::chaseTarget(sf::Vector2f targetPos, double dt)
 		direction /= length;//normalise (moves smoother)
 	}
 
-	float chaseSpeed = 2.0f;
+	float chaseSpeed = 1.0f;
 	m_guard.setPosition(guardPos + direction * chaseSpeed);
 }
 

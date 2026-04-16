@@ -87,8 +87,8 @@ protected:
 	// main window
 	sf::RenderWindow m_window;
 	Thief m_thief;
-	Guard m_guard{ sf::Vector2f{600,70}, Guard::GuardDirection::LEFT };
-	Guard m_guardTwo{ sf::Vector2f{200,400}, Guard::GuardDirection::DOWN };
+	Guard m_guard{ sf::Vector2f{600,70}, GuardDirection::LEFT };
+	Guard m_guardTwo{ sf::Vector2f{200,400}, GuardDirection::DOWN };
 	ScentTrail m_scentTrail;
 	VisionCone m_cone{ m_guard, m_scentTrail, m_thief };
 	VisionCone m_coneTwo{ m_guardTwo ,m_scentTrail,m_thief };

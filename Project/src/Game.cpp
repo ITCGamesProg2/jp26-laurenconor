@@ -130,8 +130,8 @@ void Game::update(double dt)
 
 	m_scentTrail.update(dt, m_thief.getPosition());//updates the bubbles to the thiefs position
 
-	m_cone.update(dt, m_guard.getPosition());
-	m_coneTwo.update(dt, m_guardTwo.getPosition());
+	m_cone.update(dt, m_guard.getPosition(), m_guard.getDirection());
+	m_coneTwo.update(dt, m_guardTwo.getPosition(), m_guardTwo.getDirection());
 
 	m_itemOne.update(dt);
 	m_itemTwo.update(dt);
