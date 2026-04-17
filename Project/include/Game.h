@@ -88,24 +88,23 @@ protected:
 	sf::RenderWindow m_window;
 	Thief m_thief;
 	Guard m_guard{ sf::Vector2f{600,70}, GuardDirection::LEFT };
-	Guard m_guardTwo{ sf::Vector2f{200,400}, GuardDirection::DOWN };
+	Guard m_guardTwo{ sf::Vector2f{1300,400}, GuardDirection::DOWN };
+	Guard m_guardThree{ sf::Vector2f{100,700}, GuardDirection::LEFT };
+
 	ScentTrail m_scentTrail;
 	VisionCone m_cone{ m_guard, m_scentTrail, m_thief };
 	VisionCone m_coneTwo{ m_guardTwo ,m_scentTrail,m_thief };
+	VisionCone m_coneThree{ m_guardThree, m_scentTrail, m_thief };
 	
-	Items m_itemOne{ sf::Vector2f{ 650,175 } };//top box
-	Items m_itemTwo{ sf::Vector2f{ 100,350 } };
-	Items m_itemThree{ sf::Vector2f{400,700} };
+	Items  m_itemOne{ sf::Vector2f{ 650,175 }};//top box
+	Items  m_itemTwo{ sf::Vector2f{ 100,350 } };//middle bod
+	Items  m_itemThree{ sf::Vector2f{400,700} };//bottom box
 
 	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };//gets the sprite for the background
 	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 
 
-	
-
-	//std::vector<sf::Sprite> m_wallSprites;
-	//sf::Texture m_BlankTexture{ "ResourceFiles/Images/check.jpg" };//loads blank texture
-	//sf::Texture m_bgTexture{ "Resourcefiles/Images/Background.jpg" };//loads background
-	//sf::Sprite m_bgSprite{ m_bgTexture };
+	//sf::Texture m_itemText{ "ResourceFiles/Images/jewleryOne.png" };
+	//sf::Sprite m_jewlSprite{ m_itemText };
 
 	sf::Text x_updateFPS{ m_arialFont };	// text used to display updates per second.
 	sf::Text x_drawFPS{ m_arialFont };		// text used to display draw calls per second.

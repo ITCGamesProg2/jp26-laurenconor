@@ -153,6 +153,7 @@ void Guard::chaseTarget(sf::Vector2f targetPos, double dt)
 
 	float chaseSpeed = 1.0f;
 	m_guard.setPosition(guardPos + direction * chaseSpeed);
+	
 }
 
 sf::FloatRect Guard::returnBounds()

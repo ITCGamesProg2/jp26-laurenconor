@@ -122,6 +122,10 @@ void VisionCone::checkCollision()
 	if (trailCollision())
 	{
 		m_state = VisionState::ALERT;
+		/*if (m_guard.getPosition().x < m_thief.getPosition().x)
+		{
+
+		}*/
 	}
 	if (m_trail.intersects(m_guard.returnBounds()))
 	{

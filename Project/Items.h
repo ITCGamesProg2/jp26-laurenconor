@@ -24,6 +24,13 @@ public:
 
 private:
 
+	sf::Texture m_jewlText;
+	sf::Sprite m_jewlSprite{ m_jewlText };
+
+	sf::Texture m_crownText;
+	sf::Sprite m_crownSprite{ m_jewlText };
+
+
 	double m_speed{ 0.0f };//speed for thief
 	sf::RectangleShape m_box;//gets the rectangle shape for the box for jewlery
 };
