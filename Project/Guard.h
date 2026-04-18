@@ -2,13 +2,13 @@
 #include <SFML/Graphics.hpp>
 
 enum class GuardDirection {LEFT,RIGHT,UP,DOWN};
-
+enum class GuardMovement{LEFTRIGHT, UPDOWN};
 class Guard
 {
 public:
 
 
-	Guard(sf::Vector2f startPos = sf::Vector2f{ 600,70 }, GuardDirection startDir = GuardDirection::LEFT);
+	Guard(sf::Vector2f startPos = sf::Vector2f{ 600,70 }, GuardDirection startDir = GuardDirection::LEFT, GuardMovement movement = GuardMovement::LEFTRIGHT);
 	
 	void Guard::update(double dt, sf::Vector2f thiefPos);//updates the thief
 
@@ -39,6 +39,7 @@ public:
 	void setChasing(bool chasing);
 	void chaseTarget(sf::Vector2f targetPos, double dt);
 
+void boundaryChecking();
 
 private:
 	
@@ -48,6 +49,8 @@ private:
 	bool m_isChasing = false;
 
 	GuardDirection m_direction;//initalises the direction to left
+	GuardMovement m_movement;//direction guard moves
+
 
 	double m_speed{ 0.0f };//speed for guard
 	sf::RectangleShape m_guard;//gets the basic rectangle shape

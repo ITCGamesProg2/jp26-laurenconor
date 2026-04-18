@@ -126,9 +126,9 @@ void Game::update(double dt)
 	m_guardTwo.update(dt, m_thief.getPosition());
 	m_guardThree.update(dt, m_thief.getPosition());
 
-	m_guard.LRMovement();//moves the first guard left and right
-	m_guardTwo.UDMovement();
-	m_guard.LRMovement();
+	//m_guard.LRMovement();//moves the first guard left and right
+	//m_guardTwo.UDMovement();
+	//m_guard.LRMovement();
 
 	m_scentTrail.update(dt, m_thief.getPosition());//updates the bubbles to the thiefs position
 

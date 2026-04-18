@@ -5,85 +5,71 @@
 
 VisionCone::VisionCone(Guard & guard, ScentTrail& trail, Thief& thief) : m_guard(guard), m_trail(trail),m_cone(sf::PrimitiveType::TriangleFan,20), m_thief(thief)
 {
-	initCone(guard.getPosition(), guard.getDirection());//gets the position, size and colour of the bubbles
+	initCone(guard.getPosition(), guard.getDirection(), startAngle);//gets the position, size and colour of the bubbles
 }
 
 void VisionCone::update(double dt, sf::Vector2f guardPos, GuardDirection dir)
 {
-	//leaveTrail();
-	setConePos(dt,guardPos, dir);//updates the bubbles to the thiefs position 
-	/*if (trailCollision())
-	{*/
-		handleCollision();
-		updateConeDirection(guardPos, dir);
 		checkCollision();
-	//}
+		handleCollision();//changes st
+		
+		if (m_state == VisionState::SEARCHING || m_state == VisionState::ALERT)
+		{
+			updateConeDirection(guardPos, directionToAngle(dir));
+		}
 }
 
-void VisionCone::setConePos(double dt, sf::Vector2f guardPos, GuardDirection dir)//passes the time and the position of the thief
-{
-	//m_cone.setPosition(sf::Vector2f{ guardPos.x + 15, guardPos.y + 35 });
-	updateConeDirection(guardPos, dir);
-}
 
-void VisionCone::updateConeDirection(sf::Vector2f guardPos, GuardDirection dir)
+
+void VisionCone::updateConeDirection(sf::Vector2f guardPos, float angle)
 {
 
-	switch (dir)
-	{
-	case GuardDirection::LEFT:
-		startAngle = (180 - (fieldOfView / 2.0f));
-		break;
-	case GuardDirection::RIGHT:
-		startAngle = (0 - (fieldOfView / 2.0f));
-		break;
-	case GuardDirection::DOWN:
-		startAngle = (90 - (fieldOfView / 2.0f));
-		break;
-	case GuardDirection::UP:
-		startAngle = (270 - (fieldOfView / 2.0f));
-		break;
-
-	}
-	//m_cone[0].color = m_color;
-	//if (m_guard.movingLeft() && !m_guard.movingDown())//moving left
-	//{
-	//	
-	//}
-	//else if (!m_guard.movingLeft() && !m_guard.movingDown())//movin right
-	//{
-	//	startAngle = (0 - (fieldOfView / 2.0f));
-	//}
-	//else if (m_guard.movingDown())//moving down
-	//{
-	//	startAngle = (90 - (fieldOfView / 2.0f));
-	//}
-	//else //moving up
-	//{
-	//	startAngle = (270 - (fieldOfView / 2.0f));
-	//}
+	
+	sf::Vector2f origin = { guardPos.x + 15.0f,guardPos.y + 35.0f };
 
 	const float step = fieldOfView / pointCount;
 	m_cone.setPrimitiveType(sf::PrimitiveType::TriangleFan);
 	m_cone.resize(pointCount);
-	m_cone[0].position = { sf::Vector2f{guardPos.x + 15, guardPos.y + 35} };
+	m_cone[0].position = origin;
 	m_cone[0].color = m_color;
+
 	for (int i = 0; i <= pointCount - 2; ++i)
 	{
-		float angle = (startAngle + i * step) * PI / 180.0f;
-		float x = guardPos.x + std::cos(angle) * 200;
-		float y = guardPos.y + std::sin(angle) * 200;
-
+		float a= (angle + i * step) * PI / 180.0f;
+		float x = origin.x + std::cos(a) * 200;
+		float y = origin.y + std::sin(a) * 200;
 		m_cone[i + 1].position = { x,y };
 		m_cone[i + 1].color = m_color;
 	}
 
 }
 
-void VisionCone::initCone(sf::Vector2f guardPos, GuardDirection dir)
+float VisionCone::directionToAngle(GuardDirection dir)
 {
-	//m_cone.setPointCount(5);
-	updateConeDirection(guardPos,dir);
+	switch (dir)
+	{
+	case GuardDirection::LEFT:
+		return  (180 - (fieldOfView / 2.0f));
+		break;
+	case GuardDirection::RIGHT:
+		return  (0 - (fieldOfView / 2.0f));
+		break;
+	case GuardDirection::DOWN:
+		return (90 - (fieldOfView / 2.0f));
+		break;
+	case GuardDirection::UP:
+		return (270 - (fieldOfView / 2.0f));
+		break;
+		return 0.0f;
+
+	}
+
+}
+
+void VisionCone::initCone(sf::Vector2f guardPos, GuardDirection dir,float startingAngle)
+{
+	
+	updateConeDirection(guardPos, directionToAngle(dir));
 		
 }
 
@@ -119,18 +105,27 @@ void VisionCone::handleCollision()
 
 void VisionCone::checkCollision()
 {
+	m_state = VisionState::SEARCHING;
+	m_guard.setChasing(false);
+
 	if (trailCollision())
 	{
 		m_state = VisionState::ALERT;
-		/*if (m_guard.getPosition().x < m_thief.getPosition().x)
-		{
-
-		}*/
+		
 	}
 	if (m_trail.intersects(m_guard.returnBounds()))
 	{
 		m_guard.setChasing(true);
 		m_state = VisionState::PERSUING;
+
+		sf::Vector2f diff = m_thief.getPosition() - m_guard.getPosition();
+		float angleRad = std::atan2(diff.y, diff.x);
+		float angleDeg = angleRad * (180.0f/ PI);
+		startAngle = angleDeg - (fieldOfView / 2.0f);
+		
+		updateConeDirection(m_guard.getPosition(), startAngle);
+		
+		
 	}
 	else {
 		m_guard.setChasing(false);

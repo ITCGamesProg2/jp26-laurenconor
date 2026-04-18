@@ -1,7 +1,7 @@
 #include "Guard.h"
 #include <iostream>
 
-Guard::Guard(sf::Vector2f startPos, GuardDirection startDir) : m_direction(startDir)
+Guard::Guard(sf::Vector2f startPos, GuardDirection startDir, GuardMovement movement) : m_direction(startDir), m_movement(movement)
 {
 	initSprites(startPos);
 }
@@ -14,10 +14,18 @@ void Guard::update(double dt, sf::Vector2f thiefPos)
 	}
 	else
 	{
-		LRMovement();
+		if (m_movement == GuardMovement::LEFTRIGHT)
+	{
+			LRMovement();
+		}
+		else
+		{
+			UDMovement();
+		}
+		
 		movement();
 	}
-	
+	boundaryChecking();
 }
 
 //Guard::getDirection() const
@@ -70,15 +78,14 @@ void Guard::LRMovement()//moves the guard in specific patterns - left and right 
 	if (m_direction == GuardDirection::LEFT && m_guard.getPosition().x <= 0)
 	{
 		m_direction = GuardDirection::RIGHT;//if player is at the very left of the screen, it starts moving in the opposite direction which is right 
-		left = false;
-		
+		m_guard.setPosition({ 0,m_guard.getPosition().y });
+		left = false;	
 	}
 	if (m_direction == GuardDirection::RIGHT && m_guard.getPosition().x + 30 >= 1440)
 	{
 		m_direction = GuardDirection::LEFT;//if player is at the right of the screen it will move in the left direction once again
+		m_guard.setPosition({ 1410,m_guard.getPosition().y });
 		left = true;
-		
-	
 	}
 }
 
@@ -96,6 +103,28 @@ void Guard::UDMovement()
 		down = false;
 	}
 
+}
+
+void Guard::boundaryChecking()
+{
+	if (m_guard.getPosition().x < 0)
+	{
+		m_direction = GuardDirection::RIGHT;
+	}
+	else if( m_guard.getPosition().x + 30 > 1440)
+	{
+		m_direction = GuardDirection::LEFT;
+	}
+	else if (m_guard.getPosition().y < 0)
+	{
+		m_direction = GuardDirection::DOWN;
+
+	}	
+	else if (m_guard.getPosition().y + 70 > 900)
+	{
+		m_direction = GuardDirection::UP;
+	}
+	
 }
 
 bool Guard::movingLeft()
@@ -150,7 +179,28 @@ void Guard::chaseTarget(sf::Vector2f targetPos, double dt)
 	{
 		direction /= length;//normalise (moves smoother)
 	}
-
+	if (std::abs(direction.x) > std::abs(direction.y))
+	{
+		if (direction.x > 0)
+		{
+			m_direction = GuardDirection::RIGHT;
+		}
+		else
+		{
+			m_direction = GuardDirection::LEFT;
+		}
+	}
+	else
+	{
+		if (direction.y > 0)
+		{
+			m_direction = GuardDirection::DOWN;
+		}
+		else
+		{
+			m_direction = GuardDirection::UP;
+		}
+	}
 	float chaseSpeed = 1.0f;
 	m_guard.setPosition(guardPos + direction * chaseSpeed);
 	
