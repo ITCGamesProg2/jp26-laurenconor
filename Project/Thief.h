@@ -23,10 +23,17 @@ public:
 	bool wallChecking();
 	void setBox(Items* box);
 
+	bool alive();
+	bool m_alive = true;
+	
+	void loseLife(double dt);
+	int getLives() const;
 
 	sf::FloatRect Thief::returnBounds();
 	
-	
+	float const TOTAL_LIVES = 3;
+	float m_lives = TOTAL_LIVES;
+	float m_timer{ 0.0f };
 
 private:
 

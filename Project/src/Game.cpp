@@ -25,6 +25,11 @@ void Game::init()
 	m_thief.setBox(&m_itemTwo);
 	m_thief.setBox(&m_itemThree); //three boxes are stored and checked if collided with
 
+	livesMessage.setFont(m_arialFont);
+	livesMessage.setPosition(sf::Vector2f{ 1300, 40 });
+	livesMessage.setCharacterSize(24);
+	livesMessage.setFillColor(sf::Color::White);
+
 #ifdef TEST_FPS
 
 
@@ -127,24 +132,29 @@ void Game::processKeyPressed(const std::optional<sf::Event>& t_event)
 void Game::update(double dt)
 {
 	m_thief.update(dt);//updates the thief
+	
+		m_guard.update(dt, m_thief.getPosition());//updates the guard
+		m_guardTwo.update(dt, m_thief.getPosition());
+		m_guardThree.update(dt, m_thief.getPosition());
 
-	m_guard.update(dt, m_thief.getPosition());//updates the guard
-	m_guardTwo.update(dt, m_thief.getPosition());
-	m_guardThree.update(dt, m_thief.getPosition());
+		//m_guard.LRMovement();//moves the first guard left and right
+		//m_guardTwo.UDMovement();
+		//m_guard.LRMovement();
 
-	//m_guard.LRMovement();//moves the first guard left and right
-	//m_guardTwo.UDMovement();
-	//m_guard.LRMovement();
+		m_scentTrail.update(dt, m_thief.getPosition());//updates the bubbles to the thiefs position
 
-	m_scentTrail.update(dt, m_thief.getPosition());//updates the bubbles to the thiefs position
+		m_cone.update(dt, m_guard.getPosition(), m_guard.getDirection());
+		m_coneTwo.update(dt, m_guardTwo.getPosition(), m_guardTwo.getDirection());
+		m_coneThree.update(dt, m_guardThree.getPosition(), m_guardThree.getDirection());
 
-	m_cone.update(dt, m_guard.getPosition(), m_guard.getDirection());
-	m_coneTwo.update(dt, m_guardTwo.getPosition(), m_guardTwo.getDirection());
-	m_coneThree.update(dt, m_guardThree.getPosition(), m_guardThree.getDirection());
+		m_itemOne.update(dt);
+		m_itemTwo.update(dt);
+		m_itemThree.update(dt);
 
-	m_itemOne.update(dt);
-	m_itemTwo.update(dt);
-	m_itemThree.update(dt);
+		std::string livesMSG = "LIVES: " + std::to_string(m_thief.getLives());
+		livesMessage.setString(livesMSG);
+		
+	
 }
 
 
@@ -157,23 +167,26 @@ void Game::render()
 	m_window.draw(x_updateFPS);//updates fps message
 	m_window.draw(x_drawFPS);//draws fps message
 	
+	m_window.draw(livesMessage);
 #endif
 	m_thief.render(m_window);//draws the thief
 
-	m_guard.render(m_window);//draws the guards
-	m_guardTwo.render(m_window);
-	m_guardThree.render(m_window);
+	if (m_thief.alive())
+	{
+		m_guard.render(m_window);//draws the guards
+		m_guardTwo.render(m_window);
+		m_guardThree.render(m_window);
 
-	m_scentTrail.render(m_window);//draws each bubble
+		m_scentTrail.render(m_window);//draws each bubble
 
-	m_cone.render(m_window);
-	m_coneTwo.render(m_window);
-	m_coneThree.render(m_window); //draws the vision cones
+		m_cone.render(m_window);
+		m_coneTwo.render(m_window);
+		m_coneThree.render(m_window); //draws the vision cones
 
-	m_itemOne.render(m_window);
-	m_itemTwo.render(m_window);
-	m_itemThree.render(m_window);//draws the boxes holding the museme items
-
+		m_itemOne.render(m_window);
+		m_itemTwo.render(m_window);
+		m_itemThree.render(m_window);//draws the boxes holding the museme items
+	}
 	m_window.display();	
 }
 

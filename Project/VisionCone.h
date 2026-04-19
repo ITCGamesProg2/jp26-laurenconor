@@ -17,7 +17,7 @@ public:
 	void render(sf::RenderWindow& window);
 	bool trailCollision();
 	void handleCollision();
-	void checkCollision();
+	void checkCollision(double dt);
 	
 //	void handleCollision();
 

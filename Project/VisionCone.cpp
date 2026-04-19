@@ -10,7 +10,7 @@ VisionCone::VisionCone(Guard & guard, ScentTrail& trail, Thief& thief) : m_guard
 
 void VisionCone::update(double dt, sf::Vector2f guardPos, GuardDirection dir)
 {
-		checkCollision();
+		checkCollision(dt);
 		handleCollision();//changes st
 		
 		if (m_state == VisionState::SEARCHING || m_state == VisionState::ALERT)
@@ -101,7 +101,7 @@ void VisionCone::handleCollision()
 	}
 }
 
-void VisionCone::checkCollision()
+void VisionCone::checkCollision(double dt)
 {
 	m_state = VisionState::SEARCHING;
 	m_guard.setChasing(false);
@@ -131,6 +131,7 @@ void VisionCone::checkCollision()
 	if (m_guard.intersects(m_thief.returnBounds()))
 	{
 		m_state = VisionState::ATTACKING;
+		m_thief.loseLife(dt);
 	}
 
 }

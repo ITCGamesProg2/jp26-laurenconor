@@ -33,7 +33,7 @@ void Thief::handleKeyInput()//gets the key inputs and moves it in the direction 
 	sf::Vector2f pos = m_thief.getPosition();
 	
 
-		std::cout << "collliding" << std::endl;
+	//	std::cout << "collliding" << std::endl;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))//up
 		{
 			m_thief.setPosition(sf::Vector2f{ pos.x  ,pos.y - 1 });
@@ -115,6 +115,38 @@ void Thief::setBox(Items* box)
 	m_boxes.push_back(box);
 }
 
+bool Thief::alive()
+{
+	if (m_lives > 0)
+	{
+		m_alive = true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+void Thief::loseLife(double dt)
+{
+	if (m_lives <= 0) return;
+
+	m_timer += dt;
+
+	if (m_timer >= 1000)
+	{
+		m_lives -= 1;
+		m_timer = 0.0f;
+		std::cout << "remianing lives: " << m_lives;
+	}
+
+}
+
+int Thief::getLives() const
+{
+	return m_lives;
+}
 
 sf::FloatRect Thief::returnBounds()
 {

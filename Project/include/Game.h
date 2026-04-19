@@ -103,8 +103,8 @@ protected:
 	sf::Texture m_bgTexture{ "ResourceFiles/Images/Background.jpeg" };//gets the sprite for the background
 	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 
 
-	//sf::Texture m_itemText{ "ResourceFiles/Images/jewleryOne.png" };
-	//sf::Sprite m_jewlSprite{ m_itemText };
+	sf::Text livesMessage{ m_arialFont };
+
 
 	sf::Text x_updateFPS{ m_arialFont };	// text used to display updates per second.
 	sf::Text x_drawFPS{ m_arialFont };		// text used to display draw calls per second.
