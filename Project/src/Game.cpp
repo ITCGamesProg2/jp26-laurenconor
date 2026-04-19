@@ -20,9 +20,15 @@ void Game::init()
 	{
 		std::cerr<< "error ";
 	}
-	
+
+	m_thief.setBox(&m_itemOne);
+	m_thief.setBox(&m_itemTwo);
+	m_thief.setBox(&m_itemThree); //three boxes are stored and checked if collided with
 
 #ifdef TEST_FPS
+
+
+
 
 	x_updateFPS.setFont(m_arialFont);
 	x_updateFPS.setPosition(sf::Vector2f{20.0f,300.0f});
@@ -162,11 +168,11 @@ void Game::render()
 
 	m_cone.render(m_window);
 	m_coneTwo.render(m_window);
-	m_coneThree.render(m_window);
+	m_coneThree.render(m_window); //draws the vision cones
 
 	m_itemOne.render(m_window);
 	m_itemTwo.render(m_window);
-	m_itemThree.render(m_window);
+	m_itemThree.render(m_window);//draws the boxes holding the museme items
 
 	m_window.display();	
 }

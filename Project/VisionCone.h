@@ -13,7 +13,7 @@ public:
 	void initCone(sf::Vector2f guardPos, GuardDirection dir,float angle);//get size, colour and position of bubbles
 	//void leaveTrail();
 	void update(double dt, sf::Vector2f guardPos, GuardDirection dir);//updates every 60th of a second
-	void setConePos(double dt, sf::Vector2f guardPos,GuardDirection dir);//sets position of particles and gets the timer for each bubble
+	//void setConePos(double dt, sf::Vector2f guardPos,GuardDirection dir);//sets position of particles and gets the timer for each bubble
 	void render(sf::RenderWindow& window);
 	bool trailCollision();
 	void handleCollision();

@@ -30,23 +30,32 @@ void Thief::render(sf::RenderWindow& window)
 
 void Thief::handleKeyInput()//gets the key inputs and moves it in the direction the player wants
 {
+	sf::Vector2f pos = m_thief.getPosition();
 	
+
+		std::cout << "collliding" << std::endl;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))//up
 		{
-			m_thief.setPosition(sf::Vector2f{ m_thief.getPosition().x  ,m_thief.getPosition().y - 1 });
+			m_thief.setPosition(sf::Vector2f{ pos.x  ,pos.y - 1 });
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))//right
 		{
-			m_thief.setPosition(sf::Vector2f{ m_thief.getPosition().x + 1, m_thief.getPosition().y });
+			m_thief.setPosition(sf::Vector2f{ pos.x + 1, pos.y });
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))//left
 		{
-			m_thief.setPosition(sf::Vector2f{ m_thief.getPosition().x - 1,  m_thief.getPosition().y });
+			m_thief.setPosition(sf::Vector2f{ pos.x - 1,  pos.y });
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))//down
 		{
-			m_thief.setPosition(sf::Vector2f{ m_thief.getPosition().x ,m_thief.getPosition().y + 1 });
+			m_thief.setPosition(sf::Vector2f{ pos.x ,pos.y + 1 });
 		}
+
+		if (wallChecking())
+		{
+			m_thief.setPosition(pos);
+		}
+	
 	
 }
 
@@ -85,6 +94,25 @@ void Thief::boundChecking()
 	}
 
 	
+}
+
+bool Thief::wallChecking()
+{
+	for (Items* box : m_boxes) //checks each box
+	{
+		if (box == nullptr) continue; //if not toching of the box it does nothing
+
+		if (box->returnGlobalBounds().findIntersection(m_thief.getGlobalBounds())) //thief intersects with box
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void Thief::setBox(Items* box)
+{
+	m_boxes.push_back(box);
 }
 
 

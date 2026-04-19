@@ -60,10 +60,8 @@ float VisionCone::directionToAngle(GuardDirection dir)
 	case GuardDirection::UP:
 		return (270 - (fieldOfView / 2.0f));
 		break;
-		return 0.0f;
-
 	}
-
+	return 0.0f;
 }
 
 void VisionCone::initCone(sf::Vector2f guardPos, GuardDirection dir,float startingAngle)

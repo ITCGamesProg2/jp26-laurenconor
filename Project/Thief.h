@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "Items.h"
 
 class Thief 
 {
@@ -19,13 +19,20 @@ public:
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
 	void boundChecking();
+	
+	bool wallChecking();
+	void setBox(Items* box);
 
 
 	sf::FloatRect Thief::returnBounds();
 	
+	
 
 private:
 
+	std::vector<Items*> m_boxes;
+
 	double m_speed{ 0.0f };//speed for thief
 	sf::RectangleShape m_thief;//gets the rectangle shape for the thief
+
 };

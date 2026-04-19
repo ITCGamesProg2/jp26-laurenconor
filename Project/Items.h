@@ -19,7 +19,8 @@ public:
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
 
-	//sf::FloatRect Items::returnBounds();
+	
+	sf::FloatRect Items::returnGlobalBounds();
 
 
 private:
@@ -30,6 +31,14 @@ private:
 	sf::Texture m_crownText;
 	sf::Sprite m_crownSprite{ m_jewlText };
 
+	sf::Texture m_spearText;
+	sf::Sprite m_spearSprite{ m_spearText };
+
+	sf::Texture m_cloakText;
+	sf::Sprite m_cloakSprite{ m_cloakText };
+
+	sf::Texture m_butterfliesText;
+	sf::Sprite m_butterfliesSprite{ m_butterfliesText };
 
 	double m_speed{ 0.0f };//speed for thief
 	sf::RectangleShape m_box;//gets the rectangle shape for the box for jewlery
