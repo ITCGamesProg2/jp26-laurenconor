@@ -25,6 +25,11 @@ void Game::init()
 	m_thief.setBox(&m_itemTwo);
 	m_thief.setBox(&m_itemThree); //three boxes are stored and checked if collided with
 
+	/*m_thief.addItem(&m_itemOne);
+	m_thief.addItem(&m_itemTwo);
+	m_thief.addItem(&m_itemThree);*/
+
+
 	livesMessage.setFont(m_arialFont);
 	livesMessage.setPosition(sf::Vector2f{ 1300, 40 });
 	livesMessage.setCharacterSize(24);

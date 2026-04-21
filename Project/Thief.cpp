@@ -3,6 +3,7 @@
 
 Thief::Thief()
 {
+	m_items = new Items(sf::Vector2f{ 0,0 });
 	initSprites();
 }
 
@@ -16,97 +17,131 @@ void Thief::update(double dt)
 
 void Thief::initSprites()//gets the basic colours for the rectangle so i can visualise what is going on even without the proper sprite
 {
-	/*if (!m_thiefTexture.loadFromFile("ResourceFiles/Images/jewleryOne.png"))
+	if (!m_thiefTexture.loadFromFile("ResourceFiles/Images/thief_crouch.png"))
 	{
-		std::cout << "error loading thief sprite"
-	}*/
+		std::cout << "error loading thief sprite" << std::endl;
+	}
 	m_thief.setFillColor(sf::Color::Magenta);
-	m_thief.setSize(sf::Vector2f{ 30,70 });
-	m_thief.setPosition(sf::Vector2f{ 10,70 });
+	
+	
+
+
+	m_thiefSprite = sf::Sprite{ m_thiefTexture };
+	m_thiefSprite.setTextureRect(sf::IntRect({ 15,3 }, { 30, 67 }));
+	m_thiefSprite.setScale(sf::Vector2f{ 2,2 });
+	m_thiefSprite.setPosition(sf::Vector2f{ 10,70 });
 
 
 }
 void Thief::render(sf::RenderWindow& window)
 {
-	
-	window.draw(m_thief);
+	//window.draw(m_thief);
+	window.draw(m_thiefSprite);
 }
 
 void Thief::handleKeyInput()//gets the key inputs and moves it in the direction the player wants
 {
-	sf::Vector2f pos = m_thief.getPosition();
+	sf::Vector2f pos = m_thiefSprite.getPosition();
 	
 
 	//	std::cout << "collliding" << std::endl;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))//up
 		{
-			m_thief.setPosition(sf::Vector2f{ pos.x  ,pos.y - 1 });
+			m_thiefSprite.setPosition(sf::Vector2f{ pos.x  ,pos.y - 1 });
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))//right
 		{
-			m_thief.setPosition(sf::Vector2f{ pos.x + 1, pos.y });
+			m_thiefSprite.setPosition(sf::Vector2f{ pos.x + 1, pos.y });
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))//left
 		{
-			m_thief.setPosition(sf::Vector2f{ pos.x - 1,  pos.y });
+			m_thiefSprite.setPosition(sf::Vector2f{ pos.x - 1,  pos.y });
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))//down
 		{
-			m_thief.setPosition(sf::Vector2f{ pos.x ,pos.y + 1 });
+			m_thiefSprite.setPosition(sf::Vector2f{ pos.x ,pos.y + 1 });
 		}
 
 		if (wallChecking())
 		{
-			m_thief.setPosition(pos);
+			m_thiefSprite.setPosition(pos);
 		}
 	
-	
+		for (Items* item : m_boxes)
+		{
+			if (item == nullptr) continue;
+			if (item->retCloakBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			{
+				item->setCloakVisible(false);
+				std::cout << "cloakCollision" << std::endl;
+			}
+			if (item->retCrownBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			{
+				item->setCrownVisible(false);
+				std::cout << "crown Collision" << std::endl;
+			}
+			if (item->retJewlBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			{
+				item->setJewlVisible(false);
+				std::cout << "jewl Collision" << std::endl;
+			}
+			if (item->retSpearBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			{
+				item->setSpearVisible(false);
+				std::cout << "spearCollision" << std::endl;
+			}
+			if (item->retButBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			{
+				item->setButVisible(false);
+				std::cout << "but Collision" << std::endl;
+			}
+		}
+
 }
 
 
 void Thief::setPosition(sf::Vector2f t_position)//set position so we can use it in the gane
 {
-	m_thief.setPosition(t_position);
+	m_thiefSprite.setPosition(t_position);
 }
 
 sf::Vector2f Thief::getPosition() const//gets positon so we can use it in the game
 {
-	return m_thief.getPosition();
+	return m_thiefSprite.getPosition();
 }
 
 void Thief::boundChecking()
 {
 
-	if (m_thief.getPosition().x <= 0)
+	if (m_thiefSprite.getPosition().x <= 0)
 	{
-		m_thief.setPosition(sf::Vector2f{ 0, getPosition().y });
+		m_thiefSprite.setPosition(sf::Vector2f{ 0, getPosition().y });
 		
 	}
-	else if (m_thief.getPosition().x + 30 >= 1440)
+	else if (m_thiefSprite.getPosition().x + 30 >= 1440)
 	{
-		m_thief.setPosition(sf::Vector2f{ 1410, getPosition().y });
+		m_thiefSprite.setPosition(sf::Vector2f{ 1410, getPosition().y });
 	}
 
-	else if (m_thief.getPosition().y <= 0)
+	else if (m_thiefSprite.getPosition().y <= 0)
 	{
-		m_thief.setPosition(sf::Vector2f{ getPosition().x, 0});
+		m_thiefSprite.setPosition(sf::Vector2f{ getPosition().x, 0});
 	}
 
-	else if (m_thief.getPosition().y + 70 >= 900)
+	else if (m_thiefSprite.getPosition().y + 70 >= 900)
 	{
-		m_thief.setPosition(sf::Vector2f{ getPosition().x, 830 });
+		m_thiefSprite.setPosition(sf::Vector2f{ getPosition().x, 830 });
 	}
 
-	
 }
 
 bool Thief::wallChecking()
 {
 	for (Items* box : m_boxes) //checks each box
 	{
-		if (box == nullptr) continue; //if not toching of the box it does nothing
+		if (box == nullptr) continue; //if not touching of the box it does nothing
 
-		if (box->returnGlobalBounds().findIntersection(m_thief.getGlobalBounds())) //thief intersects with box
+		if (box->returnGlobalBounds().findIntersection(m_thiefSprite.getGlobalBounds())) //thief intersects with box
 		{
 			return true;
 		}
@@ -134,7 +169,7 @@ bool Thief::alive()
 
 void Thief::loseLife(double dt)
 {
-	if (m_lives <= 0) return;
+	
 
 	m_timer += dt;
 
@@ -154,5 +189,10 @@ int Thief::getLives() const
 
 sf::FloatRect Thief::returnBounds()
 {
-	return m_thief.getGlobalBounds();
+	return m_thiefSprite.getGlobalBounds();
+}
+
+void Thief::setItems(Items* items)
+{
+	m_items = items;
 }

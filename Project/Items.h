@@ -19,8 +19,34 @@ public:
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
 
-	
 	sf::FloatRect Items::returnGlobalBounds();
+
+
+	sf::FloatRect retJewlBounds();
+	sf::FloatRect retCrownBounds();
+	sf::FloatRect retSpearBounds();
+	sf::FloatRect retCloakBounds();
+	sf::FloatRect retButBounds();
+
+	bool m_jewlVisible = true;
+	bool m_crownVisible = true;
+	bool m_spearVisible = true;
+	bool m_cloakVisible = true;
+	bool m_butVisible = true;
+
+	void setJewlVisible(bool jewlVisible);
+	void setCrownVisible(bool crownVisible);
+	void setSpearVisible(bool spearVisible);
+	void setCloakVisible(bool cloakVisible);
+	void setButVisible(bool butVisible);
+
+	bool getJewlVisible() const;
+	bool getCrownlVisible() const;
+	bool getSpearVisible() const;
+	bool getCloakVisible() const;
+	bool getButVisible() const;
+
+	//bool jewlVisible = true;
 
 
 private:
@@ -29,7 +55,7 @@ private:
 	sf::Sprite m_jewlSprite{ m_jewlText };
 
 	sf::Texture m_crownText;
-	sf::Sprite m_crownSprite{ m_jewlText };
+	sf::Sprite m_crownSprite{ m_crownText };
 
 	sf::Texture m_spearText;
 	sf::Sprite m_spearSprite{ m_spearText };
@@ -40,7 +66,8 @@ private:
 	sf::Texture m_butterfliesText;
 	sf::Sprite m_butterfliesSprite{ m_butterfliesText };
 
-	double m_speed{ 0.0f };//speed for thief
+	
 	sf::RectangleShape m_box;//gets the rectangle shape for the box for jewlery
+
 };
 

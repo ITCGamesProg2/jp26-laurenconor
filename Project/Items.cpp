@@ -61,11 +61,26 @@ void Items::render(sf::RenderWindow& window)
 {
 	
 	window.draw(m_box);
-	window.draw(m_jewlSprite);
-	window.draw(m_crownSprite);
-	window.draw(m_spearSprite);
-	window.draw(m_cloakSprite);
-	window.draw(m_butterfliesSprite);
+	if (m_jewlVisible)// if item is alive/ player has not intersected
+	{
+		window.draw(m_jewlSprite);//draws sprite
+	}
+	if (m_crownVisible)// if item is alive/ player has not intersected
+	{
+		window.draw(m_crownSprite);//draws sprite
+	}
+	if (m_spearVisible)// if item is alive/ player has not intersected
+	{
+		window.draw(m_spearSprite);//draws sprite
+	}
+	if (m_cloakVisible)// if item is alive/ player has not intersected
+	{
+		window.draw(m_cloakSprite);//draws sprite
+	}
+	if (m_butVisible)// if item is alive/ player has not intersected
+	{
+		window.draw(m_butterfliesSprite);//draws sprite
+	}
 
 }
 
@@ -84,4 +99,85 @@ sf::Vector2f Items::getPosition() const//gets positon so we can use it in the ga
 sf::FloatRect Items::returnGlobalBounds()
 {
 	return m_box.getGlobalBounds();
+}
+
+
+
+//return bounds for collision checking in thief
+sf::FloatRect Items::retJewlBounds()
+{
+	return m_jewlSprite.getGlobalBounds();
+}
+
+sf::FloatRect Items::retCrownBounds()
+{
+	return m_crownSprite.getGlobalBounds();
+}
+
+sf::FloatRect Items::retSpearBounds()
+{
+	return m_spearSprite.getGlobalBounds();
+}
+
+sf::FloatRect Items::retCloakBounds()
+{
+	return m_cloakSprite.getGlobalBounds();
+}
+
+sf::FloatRect Items::retButBounds()
+{
+	return m_butterfliesSprite.getGlobalBounds();
+}
+
+
+
+//sets the bool to false if player has collided with items
+void Items::setJewlVisible(bool jewlVisible)
+{
+	m_jewlVisible = jewlVisible;
+}
+
+void Items::setCrownVisible(bool crownVisible)
+{
+	m_crownVisible = crownVisible;
+}
+
+void Items::setSpearVisible(bool spearVisible)
+{
+	m_spearVisible = spearVisible;
+}
+
+void Items::setCloakVisible(bool cloakVisible)
+{
+	m_cloakVisible = cloakVisible;
+}
+
+void Items::setButVisible(bool butVisible)
+{
+	m_butVisible = butVisible;
+}
+
+bool Items::getJewlVisible() const
+{
+	return m_jewlVisible;
+}
+
+bool Items::getCrownlVisible() const
+{
+	return m_crownVisible;
+}
+
+bool Items::getSpearVisible() const
+{
+	return m_spearVisible;
+}
+
+bool Items::getCloakVisible() const
+{
+	return m_cloakVisible;
+}
+
+bool Items::getButVisible() const
+{
+	return m_butVisible;
 }

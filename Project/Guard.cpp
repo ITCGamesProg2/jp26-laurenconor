@@ -44,8 +44,10 @@ void Guard::initSprites(sf::Vector2f startPos)//Gets the texture, sprite and pos
 	//m_guardSprite.setTexture( m_guardTexture );
 	//m_guard.setFillColor(sf::Color::Red);
 	//
-	//m_guardSprite.setTextureRect({ 0,0,30,70 });
+	
 	m_guardSprite = sf::Sprite(m_guardTexture);
+	m_guardSprite.setTextureRect(sf::IntRect{ { 0,0}, {60, 70} });
+	m_guardSprite.setScale(sf::Vector2f{ 2,2 });
 	m_guardSprite.setPosition(startPos);
 
 	
