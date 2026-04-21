@@ -76,5 +76,14 @@ bool ScentTrail::intersects(const sf::FloatRect& rect) const
 	return false;
 }
 
+float ScentTrail::retAlpha()
+{
+	for (int parNum = 0; parNum < TOTAL_PARTICLES; parNum++)
+	{
+		alpha = m_particles[parNum].getFillColor().a;
+	}
+	return alpha;
+}
+
 
 

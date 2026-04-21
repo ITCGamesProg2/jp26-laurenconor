@@ -14,9 +14,13 @@ public:
 	void render(sf::RenderWindow& window);
 	//sf::FloatRect globalBounds();
 	bool intersects(const sf::FloatRect& rect) const;
+
+
+	float retAlpha();
 	
 
 private:
+	float alpha = 0.0f;
 	static const int TOTAL_PARTICLES = 6;//set the total number of particles
 	sf::CircleShape m_particles[TOTAL_PARTICLES];// = TOTAL_PARTICLES; //get the total number of particles
 	float m_particleLifetime[TOTAL_PARTICLES];//gets lifetime of each bubble

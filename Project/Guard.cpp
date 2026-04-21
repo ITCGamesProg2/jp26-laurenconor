@@ -35,17 +35,24 @@ void Guard::update(double dt, sf::Vector2f thiefPos)
 
 
 
-void Guard::initSprites(sf::Vector2f startPos)//gets the basic rectangle for now since its easier and i can focus more on the coding , will add the sprite later 
-{
-	m_guard.setFillColor(sf::Color::Red);
-	m_guard.setSize(sf::Vector2f{ 30,70 });
-	m_guard.setPosition(startPos);
+void Guard::initSprites(sf::Vector2f startPos)//Gets the texture, sprite and position of sprite
+{	
+	if (!m_guardTexture.loadFromFile("ResourceFiles/Images/walking_guard.png"))
+	{
+		std::cout << "Guard not loading :( " <<std::endl;
+	}
+	//m_guardSprite.setTexture( m_guardTexture );
+	//m_guard.setFillColor(sf::Color::Red);
+	//
+	//m_guardSprite.setTextureRect({ 0,0,30,70 });
+	m_guardSprite = sf::Sprite(m_guardTexture);
+	m_guardSprite.setPosition(startPos);
 
 	
 }
 void Guard::render(sf::RenderWindow& window)
 {
-	window.draw(m_guard);
+	window.draw(m_guardSprite);
 }
 
 void Guard::movement()//gets movment for each direction
@@ -54,18 +61,18 @@ void Guard::movement()//gets movment for each direction
 	switch (m_direction)
 	{
 	case GuardDirection::DOWN:
-		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x ,m_guard.getPosition().y + 1 }); //moves guard down
+		m_guardSprite.setPosition(sf::Vector2f{ m_guardSprite.getPosition().x ,m_guardSprite.getPosition().y + 1 }); //moves guard down
 		//down == true;
 		break;
 	case GuardDirection::UP:
-		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x  ,m_guard.getPosition().y - 1 });//moves guard up
+		m_guardSprite.setPosition(sf::Vector2f{ m_guardSprite.getPosition().x  ,m_guardSprite.getPosition().y - 1 });//moves guard up
 		// == true;
 		break;
 	case GuardDirection::LEFT:
-		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x - 1,  m_guard.getPosition().y });//moves guard left
+		m_guardSprite.setPosition(sf::Vector2f{ m_guardSprite.getPosition().x - 1,  m_guardSprite.getPosition().y });//moves guard left
 		break;
 	case GuardDirection::RIGHT:
-		m_guard.setPosition(sf::Vector2f{ m_guard.getPosition().x + 1, m_guard.getPosition().y });//moves guard right
+		m_guardSprite.setPosition(sf::Vector2f{ m_guardSprite.getPosition().x + 1, m_guardSprite.getPosition().y });//moves guard right
 	default:
 		break;
 	}
@@ -75,29 +82,29 @@ void Guard::LRMovement()//moves the guard in specific patterns - left and right 
 {
 
 	//m_direction = GuardDirection::LEFT;
-	if (m_direction == GuardDirection::LEFT && m_guard.getPosition().x <= 0)
+	if (m_direction == GuardDirection::LEFT && m_guardSprite.getPosition().x <= 0)
 	{
 		m_direction = GuardDirection::RIGHT;//if player is at the very left of the screen, it starts moving in the opposite direction which is right 
-		m_guard.setPosition({ 0,m_guard.getPosition().y });
+		m_guardSprite.setPosition({ 0,m_guardSprite.getPosition().y });
 		left = false;	
 	}
-	if (m_direction == GuardDirection::RIGHT && m_guard.getPosition().x + 30 >= 1440)
+	if (m_direction == GuardDirection::RIGHT && m_guardSprite.getPosition().x + 30 >= 1440)
 	{
 		m_direction = GuardDirection::LEFT;//if player is at the right of the screen it will move in the left direction once again
-		m_guard.setPosition({ 1410,m_guard.getPosition().y });
+		m_guardSprite.setPosition({ 1410,m_guardSprite.getPosition().y });
 		left = true;
 	}
 }
 
 void Guard::UDMovement()
 {
-	if (m_direction == GuardDirection::UP && m_guard.getPosition().y <= 0)
+	if (m_direction == GuardDirection::UP && m_guardSprite.getPosition().y <= 0)
 	{
 		m_direction = GuardDirection::DOWN;//if player is at the very left of the screen, it starts moving in the opposite direction which is right 
 		down = true;
 	}
 	
-	if (m_direction == GuardDirection::DOWN && m_guard.getPosition().y + 70 >= 900)
+	if (m_direction == GuardDirection::DOWN && m_guardSprite.getPosition().y + 70 >= 900)
 	{
 		m_direction = GuardDirection::UP;//if player is at the right of the screen it will move in the left direction once again
 		down = false;
@@ -107,20 +114,20 @@ void Guard::UDMovement()
 
 void Guard::boundaryChecking()
 {
-	if (m_guard.getPosition().x < 0)
+	if (m_guardSprite.getPosition().x < 0)
 	{
 		m_direction = GuardDirection::RIGHT;
 	}
-	else if( m_guard.getPosition().x + 30 > 1440)
+	else if( m_guardSprite.getPosition().x + 30 > 1440)
 	{
 		m_direction = GuardDirection::LEFT;
 	}
-	else if (m_guard.getPosition().y < 0)
+	else if (m_guardSprite.getPosition().y < 0)
 	{
 		m_direction = GuardDirection::DOWN;
 
 	}	
-	else if (m_guard.getPosition().y + 70 > 900)
+	else if (m_guardSprite.getPosition().y + 70 > 900)
 	{
 		m_direction = GuardDirection::UP;
 	}
@@ -142,19 +149,19 @@ bool Guard::movingDown()
 void Guard::setPosition(sf::Vector2f t_position) //we can call this to set the position in the game class or another class we might need later
 {
 
-	m_guard.setPosition(t_position);
+	m_guardSprite.setPosition(t_position);
 }
 
 sf::Vector2f Guard::getPosition() const//can be used in game later for collision etc
 {
-	return m_guard.getPosition();
+	return m_guardSprite.getPosition();
 }
 
 
 bool Guard::intersects(const sf::FloatRect& rect) const
 {
 		
-		if (m_guard.getGlobalBounds().findIntersection(rect))
+		if (m_guardSprite.getGlobalBounds().findIntersection(rect))
 		{
 			return true;
 		}
@@ -170,7 +177,7 @@ void Guard::setChasing(bool chasing)
 
 void Guard::chaseTarget(sf::Vector2f targetPos, double dt)
 {
-	sf::Vector2f guardPos = m_guard.getPosition();
+	sf::Vector2f guardPos = m_guardSprite.getPosition();
 	sf::Vector2f direction = targetPos - guardPos;
 
 	float length = std::sqrt(direction.x * direction.x + direction.y * direction.y); //getting length of vector so we can normalise it and use it
@@ -202,11 +209,11 @@ void Guard::chaseTarget(sf::Vector2f targetPos, double dt)
 		}
 	}
 	float chaseSpeed = 1.0f;
-	m_guard.setPosition(guardPos + direction * chaseSpeed);
+	m_guardSprite.setPosition(guardPos + direction * chaseSpeed);
 	
 }
 
 sf::FloatRect Guard::returnBounds()
 {
-	return m_guard.getGlobalBounds();
+	return m_guardSprite.getGlobalBounds();
 }

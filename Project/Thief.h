@@ -35,6 +35,9 @@ public:
 	float m_lives = TOTAL_LIVES;
 	float m_timer{ 0.0f };
 
+	/*sf::Texture m_thiefTexture;
+	sf::Sprite m_thiefSprite{ m_thiefTexture };*/
+
 private:
 
 	std::vector<Items*> m_boxes;

@@ -16,6 +16,10 @@ void Thief::update(double dt)
 
 void Thief::initSprites()//gets the basic colours for the rectangle so i can visualise what is going on even without the proper sprite
 {
+	/*if (!m_thiefTexture.loadFromFile("ResourceFiles/Images/jewleryOne.png"))
+	{
+		std::cout << "error loading thief sprite"
+	}*/
 	m_thief.setFillColor(sf::Color::Magenta);
 	m_thief.setSize(sf::Vector2f{ 30,70 });
 	m_thief.setPosition(sf::Vector2f{ 10,70 });
@@ -134,7 +138,7 @@ void Thief::loseLife(double dt)
 
 	m_timer += dt;
 
-	if (m_timer >= 1000)
+	if (m_timer >= 3000)
 	{
 		m_lives -= 1;
 		m_timer = 0.0f;

@@ -41,6 +41,8 @@ public:
 
 void boundaryChecking();
 
+
+
 private:
 	
 	bool left = true;
@@ -51,8 +53,10 @@ private:
 	GuardDirection m_direction;//initalises the direction to left
 	GuardMovement m_movement;//direction guard moves
 
-
 	double m_speed{ 0.0f };//speed for guard
 	sf::RectangleShape m_guard;//gets the basic rectangle shape
+
+	sf::Texture m_guardTexture;
+	sf::Sprite m_guardSprite{ m_guardTexture };
 };
 
