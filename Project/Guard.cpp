@@ -165,6 +165,7 @@ bool Guard::intersects(const sf::FloatRect& rect) const
 		
 		if (m_guardSprite.getGlobalBounds().findIntersection(rect))
 		{
+			
 			return true;
 		}
 
@@ -174,7 +175,7 @@ bool Guard::intersects(const sf::FloatRect& rect) const
 void Guard::setChasing(bool chasing)
 {
 	m_isChasing = chasing;
-
+	m_speed = 2.0;
 }
 
 void Guard::chaseTarget(sf::Vector2f targetPos, double dt)

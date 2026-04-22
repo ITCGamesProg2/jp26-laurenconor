@@ -24,31 +24,40 @@ public:
 
 	sf::FloatRect retJewlBounds();
 	sf::FloatRect retCrownBounds();
-	sf::FloatRect retSpearBounds();
+	sf::FloatRect retSignBounds();
 	sf::FloatRect retCloakBounds();
 	sf::FloatRect retButBounds();
 	sf::FloatRect retBookBounds();
+	sf::FloatRect retHatBounds();
+	sf::FloatRect retWeaponsBounds();
+
 
 	bool m_jewlVisible = true;
 	bool m_crownVisible = true;
-	bool m_spearVisible = true;
+	bool m_signVisible = true;
 	bool m_cloakVisible = true;
 	bool m_butVisible = true;
-		bool m_bookVisible = true;
+	bool m_bookVisible = true;
+	bool m_hatVisible = true;
+	bool m_weaponsVisible = true;
 
 	void setJewlVisible(bool jewlVisible);
 	void setCrownVisible(bool crownVisible);
-	void setSpearVisible(bool spearVisible);
+	void setSignVisible(bool spearVisible);
 	void setCloakVisible(bool cloakVisible);
 	void setButVisible(bool butVisible);
 	void setBookVisible(bool bookvisible);
+	void setHatVisible(bool hatVisible);
+	void setWeaponsVisible(bool weaponsVisible);
 
 	bool getJewlVisible() const;
-	bool getCrownlVisible() const;
-	bool getSpearVisible() const;
+	bool getCrownVisible() const;
+	bool getSignVisible() const;
 	bool getCloakVisible() const;
 	bool getButVisible() const;
 	bool getBookVisible() const;
+	bool getHatVisible() const;
+	bool getWeaponsVisible() const;
 
 	//bool jewlVisible = true;
 
@@ -61,8 +70,8 @@ private:
 	sf::Texture m_crownText;
 	sf::Sprite m_crownSprite{ m_crownText };
 
-	sf::Texture m_spearText;
-	sf::Sprite m_spearSprite{ m_spearText };
+	sf::Texture m_signText;
+	sf::Sprite m_signSprite{ m_signText };
 
 	sf::Texture m_cloakText;
 	sf::Sprite m_cloakSprite{ m_cloakText };
@@ -73,6 +82,12 @@ private:
 	sf::Texture m_bookText;
 	sf::Sprite m_bookSprite{ m_bookText };
 	
+	sf::Texture m_hatText;
+	sf::Sprite m_hatSprite{ m_hatText };
+
+	sf::Texture m_weaponsText;
+	sf::Sprite m_weaponsSprite{ m_weaponsText };
+
 	sf::RectangleShape m_box;//gets the rectangle shape for the box for jewlery
 
 };

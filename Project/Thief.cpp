@@ -72,28 +72,64 @@ void Thief::handleKeyInput()//gets the key inputs and moves it in the direction 
 			if (item == nullptr) continue;
 			if (item->retCloakBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setCloakVisible(false);//returns false to stop drawing the item in the items class
+				if (m_items->getCloakVisible())
+				{
+					item->setCloakVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
 			}
 			if (item->retCrownBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setCrownVisible(false);//returns false to stop drawing the item in the items class
+				if (m_items->getCrownVisible())
+				{
+					item->setCrownVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
 			}
 			if (item->retJewlBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setJewlVisible(false);//returns false to stop drawing the item in the items class
+				if (m_items->getJewlVisible())
+				{
+					item->setJewlVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
 			}
-			if (item->retSpearBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			if (item->retSignBounds().findIntersection(m_thiefSprite.getGlobalBounds()) )
 			{
-				item->setSpearVisible(false);//returns false to stop drawing the item in the items class
+				m_exit = true;
 			}
-			if (item->retButBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			if (item->retButBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getButVisible())
 			{
-				item->setButVisible(false);//returns false to stop drawing the item in the items class
+				if (m_items->getButVisible())
+				{
+					item->setButVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
 
 			}
-			if (item->retBookBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			if (item->retBookBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getBookVisible())
 			{
-				item->setBookVisible(false);//returns false to stop drawing the item in the items class
+				if (m_items->getBookVisible())
+				{
+					item->setBookVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
+			}
+			if (item->retHatBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getHatVisible())
+			{
+				if (m_items->getHatVisible())
+				{
+					item->setHatVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
+			}
+			if (item->retWeaponsBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getWeaponsVisible())
+			{
+				if (m_items->getWeaponsVisible())
+				{
+					item->setWeaponsVisible(false);//returns false to stop drawing the item in the items class
+					m_points += 5;
+				}
 			}
 		}
 
@@ -166,6 +202,10 @@ bool Thief::alive()
 	}
 }
 
+bool Thief::exit()
+{
+	return m_exit;
+}
 
 void Thief::loseLife(double dt)
 {
@@ -185,6 +225,10 @@ void Thief::loseLife(double dt)
 int Thief::getLives() const
 {
 	return m_lives;
+}
+int Thief::getPoints()
+{
+	return m_points;
 }
 
 sf::FloatRect Thief::returnBounds()

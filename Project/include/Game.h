@@ -104,6 +104,8 @@ protected:
 	sf::Sprite m_bgSprite{ m_bgTexture };//draws the background 
 
 	sf::Text livesMessage{ m_arialFont };
+	sf::Text pointsMessage{ m_arialFont };
+	sf::Text moneyMessage{ m_arialFont };
 
 
 	sf::Text x_updateFPS{ m_arialFont };	// text used to display updates per second.

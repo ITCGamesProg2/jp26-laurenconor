@@ -25,6 +25,8 @@ public:
 
 	bool alive();
 	bool m_alive = true;
+	bool exit();
+	bool m_exit = false;
 	
 	void loseLife(double dt);
 	int getLives() const;
@@ -37,10 +39,14 @@ public:
 
 	void setItems(Items* items);
 
+	int getPoints();
+
 	sf::Texture m_thiefTexture;
 	sf::Sprite m_thiefSprite{ m_thiefTexture };
 
 private:
+
+	int m_points = 0;
 
 	std::vector<Items*> m_boxes;
 

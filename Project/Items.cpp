@@ -2,7 +2,7 @@
 #include <iostream>
 
 Items::Items(sf::Vector2f position) :m_jewlText("ResourceFiles/Images/jewleryOne.png"), m_crownText("ResourceFiles/Images/crown.png"),
-m_spearText("ResourceFiles/Images/spear.png"), m_cloakText("ResourceFiles/Images/cloak.png"), m_butterfliesText("ResourceFiles/Images/butterflies.png"), m_bookText("ResourceFiles/Images/book.png")
+m_signText("ResourceFiles/Images/sign.png"), m_cloakText("ResourceFiles/Images/cloak.png"), m_butterfliesText("ResourceFiles/Images/butterflies.png"), m_bookText("ResourceFiles/Images/book.png"),m_hatText("ResourceFiles/Images/hat.png"),m_weaponsText("ResourceFiles/Images/weapons.png")
 {
 	initSprites(position);
 }
@@ -36,13 +36,12 @@ void Items::initSprites(sf::Vector2f position)//gets the basic colours for the r
 	m_crownSprite.setTexture(m_crownText);
 
 
-	if (!m_spearText.loadFromFile("ResourceFiles/Images/spear.png"))
+	if (!m_signText.loadFromFile("ResourceFiles/Images/sign.png"))
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_spearSprite.setPosition(sf::Vector2f{ 670,170 });
-	m_spearSprite.setScale(sf::Vector2f{ 1.5, 1.5 });
-	m_spearSprite.setTexture(m_spearText);
+	m_signSprite.setPosition(sf::Vector2f{ 1300,800 });
+	m_signSprite.setTexture(m_signText);
 
 	if (!m_cloakText.loadFromFile("ResourceFiles/Images/cloak.png"))
 	{
@@ -65,7 +64,23 @@ void Items::initSprites(sf::Vector2f position)//gets the basic colours for the r
 	}
 	m_bookSprite.setPosition(sf::Vector2f(990, 150));
 	m_bookSprite.setTexture(m_bookText);
+
+	if (!m_hatText.loadFromFile("ResourceFiles/Images/hat.png"))
+	{
+		std::cout << "hat not loading properly" << std::endl;
+	}
+	m_hatSprite.setPosition(sf::Vector2f(450, 650));
+	m_hatSprite.setTexture(m_hatText);
+
+	if (!m_weaponsText.loadFromFile("ResourceFiles/Images/weapons.png"))
+	{
+		std::cout << "weapons not loading properly" << std::endl;
+	}
+	m_weaponsSprite.setPosition(sf::Vector2f(650, 650));
+	m_weaponsSprite.setTexture(m_weaponsText);
+
 }
+
 void Items::render(sf::RenderWindow& window)
 {
 	
@@ -78,9 +93,9 @@ void Items::render(sf::RenderWindow& window)
 	{
 		window.draw(m_crownSprite);//draws sprite
 	}
-	if (m_spearVisible)// if item is alive/ player has not intersected
+	if (m_signVisible)// if item is alive/ player has not intersected
 	{
-		window.draw(m_spearSprite);//draws sprite
+		window.draw(m_signSprite);//draws sprite
 	}
 	if (m_cloakVisible)// if item is alive/ player has not intersected
 	{
@@ -93,6 +108,14 @@ void Items::render(sf::RenderWindow& window)
 	if(m_bookVisible)
 	{
 		window.draw(m_bookSprite);
+	}
+	if (m_hatVisible)
+	{
+		window.draw(m_hatSprite);
+	}
+	if (m_weaponsVisible)
+	{
+		window.draw(m_weaponsSprite);
 	}
 
 }
@@ -127,9 +150,9 @@ sf::FloatRect Items::retCrownBounds()
 	return m_crownSprite.getGlobalBounds();
 }
 
-sf::FloatRect Items::retSpearBounds()
+sf::FloatRect Items::retSignBounds()
 {
-	return m_spearSprite.getGlobalBounds();
+	return m_signSprite.getGlobalBounds();
 }
 
 sf::FloatRect Items::retCloakBounds()
@@ -146,38 +169,87 @@ sf::FloatRect Items::retBookBounds()
 	return m_bookSprite.getGlobalBounds();
 }
 
+sf::FloatRect Items::retHatBounds()
+{
+	return m_hatSprite.getGlobalBounds();
+}
+
+sf::FloatRect Items::retWeaponsBounds()
+{
+	return m_weaponsSprite.getGlobalBounds();
+}
 
 
 //sets the bool to false if player has collided with items
 void Items::setJewlVisible(bool jewlVisible)
 {
 	m_jewlVisible = jewlVisible;
+	if(!jewlVisible)
+	{
+		m_jewlSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
 }
 
 void Items::setCrownVisible(bool crownVisible)
 {
 	m_crownVisible = crownVisible;
+	if (!crownVisible)
+	{
+		m_crownSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
 }
 
-void Items::setSpearVisible(bool spearVisible)
+void Items::setSignVisible(bool signVisible)
 {
-	m_spearVisible = spearVisible;
+	m_signVisible = signVisible;
+	
 }
 
 void Items::setCloakVisible(bool cloakVisible)
 {
 	m_cloakVisible = cloakVisible;
+	if (!cloakVisible)
+	{
+		m_cloakSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
 }
 
 void Items::setButVisible(bool butVisible)
 {
 	m_butVisible = butVisible;
+	if (!butVisible)
+	{
+		m_butterfliesSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
 }
 
 void Items::setBookVisible(bool bookVisible)
 {
 	m_bookVisible = bookVisible;
+	if (!bookVisible)
+	{
+		m_bookSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
 }
+
+void Items::setHatVisible(bool hatVisible)
+{
+	m_hatVisible = hatVisible;
+	if (!hatVisible)
+	{
+		m_hatSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
+}
+
+void Items::setWeaponsVisible(bool weaponsVisible)
+{
+	m_weaponsVisible = weaponsVisible;
+	if (!weaponsVisible)
+	{
+		m_weaponsSprite.setPosition(sf::Vector2f{ -100,-100 });
+	}
+}
+
 
 
 bool Items::getJewlVisible() const
@@ -185,14 +257,14 @@ bool Items::getJewlVisible() const
 	return m_jewlVisible;
 }
 
-bool Items::getCrownlVisible() const
+bool Items::getCrownVisible() const
 {
 	return m_crownVisible;
 }
 
-bool Items::getSpearVisible() const
+bool Items::getSignVisible() const
 {
-	return m_spearVisible;
+	return m_signVisible;
 }
 
 bool Items::getCloakVisible() const
@@ -208,4 +280,14 @@ bool Items::getButVisible() const
 bool Items::getBookVisible() const
 {
 	return m_bookVisible;
+}
+
+bool Items::getHatVisible() const
+{
+	return m_hatVisible;
+}
+
+bool Items::getWeaponsVisible() const
+{
+	return m_hatVisible;
 }
