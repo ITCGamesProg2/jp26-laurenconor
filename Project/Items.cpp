@@ -2,7 +2,7 @@
 #include <iostream>
 
 Items::Items(sf::Vector2f position) :m_jewlText("ResourceFiles/Images/jewleryOne.png"), m_crownText("ResourceFiles/Images/crown.png"),
-m_spearText("ResourceFiles/Images/spear.png"), m_cloakText("ResourceFiles/Images/cloak.png"), m_butterfliesText("ResourceFiles/Images/butterflies.png")
+m_spearText("ResourceFiles/Images/spear.png"), m_cloakText("ResourceFiles/Images/cloak.png"), m_butterfliesText("ResourceFiles/Images/butterflies.png"), m_bookText("ResourceFiles/Images/book.png")
 {
 	initSprites(position);
 }
@@ -23,14 +23,16 @@ void Items::initSprites(sf::Vector2f position)//gets the basic colours for the r
 	{
 		std::cout << "file not loading properly" << std::endl; 
 	}
-	m_jewlSprite.setPosition(sf::Vector2f{ 450,350 });
+	m_jewlSprite.setPosition(sf::Vector2f{ 450,320 });
+	m_jewlSprite.setScale(sf::Vector2f{ 2, 2});
 	m_jewlSprite.setTexture( m_jewlText);
 
 	if (!m_crownText.loadFromFile("ResourceFiles/Images/crown.png"))
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_crownSprite.setPosition(sf::Vector2f{ 300,360 });
+	m_crownSprite.setPosition(sf::Vector2f{ 300,330 });
+	m_crownSprite.setScale(sf::Vector2f{ 2, 2 });
 	m_crownSprite.setTexture(m_crownText);
 
 
@@ -38,7 +40,8 @@ void Items::initSprites(sf::Vector2f position)//gets the basic colours for the r
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_spearSprite.setPosition(sf::Vector2f{ 670,180 });
+	m_spearSprite.setPosition(sf::Vector2f{ 670,170 });
+	m_spearSprite.setScale(sf::Vector2f{ 1.5, 1.5 });
 	m_spearSprite.setTexture(m_spearText);
 
 	if (!m_cloakText.loadFromFile("ResourceFiles/Images/cloak.png"))
@@ -52,10 +55,16 @@ void Items::initSprites(sf::Vector2f position)//gets the basic colours for the r
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_butterfliesSprite.setPosition(sf::Vector2f{ 800,180 });
+	m_butterfliesSprite.setPosition(sf::Vector2f{ 820,170 });
+	m_butterfliesSprite.setScale(sf::Vector2f{ 1.5, 1.5 });
 	m_butterfliesSprite.setTexture(m_butterfliesText);
 
-
+	if (!m_bookText.loadFromFile("ResourceFiles/Images/book.png"))
+	{
+		std::cout << "book not loading properly" << std::endl;
+	}
+	m_bookSprite.setPosition(sf::Vector2f(990, 150));
+	m_bookSprite.setTexture(m_bookText);
 }
 void Items::render(sf::RenderWindow& window)
 {
@@ -80,6 +89,10 @@ void Items::render(sf::RenderWindow& window)
 	if (m_butVisible)// if item is alive/ player has not intersected
 	{
 		window.draw(m_butterfliesSprite);//draws sprite
+	}
+	if(m_bookVisible)
+	{
+		window.draw(m_bookSprite);
 	}
 
 }
@@ -128,6 +141,10 @@ sf::FloatRect Items::retButBounds()
 {
 	return m_butterfliesSprite.getGlobalBounds();
 }
+sf::FloatRect Items::retBookBounds()
+{
+	return m_bookSprite.getGlobalBounds();
+}
 
 
 
@@ -157,6 +174,12 @@ void Items::setButVisible(bool butVisible)
 	m_butVisible = butVisible;
 }
 
+void Items::setBookVisible(bool bookVisible)
+{
+	m_bookVisible = bookVisible;
+}
+
+
 bool Items::getJewlVisible() const
 {
 	return m_jewlVisible;
@@ -180,4 +203,9 @@ bool Items::getCloakVisible() const
 bool Items::getButVisible() const
 {
 	return m_butVisible;
+}
+
+bool Items::getBookVisible() const
+{
+	return m_bookVisible;
 }

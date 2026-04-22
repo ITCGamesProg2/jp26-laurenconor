@@ -25,7 +25,7 @@ void VisionCone::updateConeDirection(sf::Vector2f guardPos, float angle)
 {
 
 	
-	sf::Vector2f origin = { guardPos.x + 15.0f,guardPos.y + 35.0f };
+	sf::Vector2f origin = { guardPos.x + 8.0f,guardPos.y + 75.0f };
 
 	const float step = fieldOfView / pointCount;
 	m_cone.setPrimitiveType(sf::PrimitiveType::TriangleFan);

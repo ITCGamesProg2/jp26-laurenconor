@@ -9,6 +9,8 @@ ScentTrail::ScentTrail()
 void ScentTrail::update(double dt, sf::Vector2f thiefPos)
 {
 	//leaveTrail();
+	thiefPos.x = thiefPos.x + 15;
+	thiefPos.y = thiefPos.y + 50;
 	setParticlePos(dt, thiefPos);//updates the bubbles to the thiefs position 
 }
 

@@ -27,24 +27,28 @@ public:
 	sf::FloatRect retSpearBounds();
 	sf::FloatRect retCloakBounds();
 	sf::FloatRect retButBounds();
+	sf::FloatRect retBookBounds();
 
 	bool m_jewlVisible = true;
 	bool m_crownVisible = true;
 	bool m_spearVisible = true;
 	bool m_cloakVisible = true;
 	bool m_butVisible = true;
+		bool m_bookVisible = true;
 
 	void setJewlVisible(bool jewlVisible);
 	void setCrownVisible(bool crownVisible);
 	void setSpearVisible(bool spearVisible);
 	void setCloakVisible(bool cloakVisible);
 	void setButVisible(bool butVisible);
+	void setBookVisible(bool bookvisible);
 
 	bool getJewlVisible() const;
 	bool getCrownlVisible() const;
 	bool getSpearVisible() const;
 	bool getCloakVisible() const;
 	bool getButVisible() const;
+	bool getBookVisible() const;
 
 	//bool jewlVisible = true;
 
@@ -66,6 +70,8 @@ private:
 	sf::Texture m_butterfliesText;
 	sf::Sprite m_butterfliesSprite{ m_butterfliesText };
 
+	sf::Texture m_bookText;
+	sf::Sprite m_bookSprite{ m_bookText };
 	
 	sf::RectangleShape m_box;//gets the rectangle shape for the box for jewlery
 

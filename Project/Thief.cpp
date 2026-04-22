@@ -72,28 +72,28 @@ void Thief::handleKeyInput()//gets the key inputs and moves it in the direction 
 			if (item == nullptr) continue;
 			if (item->retCloakBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setCloakVisible(false);
-				std::cout << "cloakCollision" << std::endl;
+				item->setCloakVisible(false);//returns false to stop drawing the item in the items class
 			}
 			if (item->retCrownBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setCrownVisible(false);
-				std::cout << "crown Collision" << std::endl;
+				item->setCrownVisible(false);//returns false to stop drawing the item in the items class
 			}
 			if (item->retJewlBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setJewlVisible(false);
-				std::cout << "jewl Collision" << std::endl;
+				item->setJewlVisible(false);//returns false to stop drawing the item in the items class
 			}
 			if (item->retSpearBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setSpearVisible(false);
-				std::cout << "spearCollision" << std::endl;
+				item->setSpearVisible(false);//returns false to stop drawing the item in the items class
 			}
 			if (item->retButBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
 			{
-				item->setButVisible(false);
-				std::cout << "but Collision" << std::endl;
+				item->setButVisible(false);//returns false to stop drawing the item in the items class
+
+			}
+			if (item->retBookBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			{
+				item->setBookVisible(false);//returns false to stop drawing the item in the items class
 			}
 		}
 
