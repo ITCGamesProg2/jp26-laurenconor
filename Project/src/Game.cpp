@@ -25,30 +25,28 @@ void Game::init()
 	m_thief.setBox(&m_itemTwo);
 	m_thief.setBox(&m_itemThree); //three boxes are stored and checked if collided with
 
-	/*m_thief.addItem(&m_itemOne);
-	m_thief.addItem(&m_itemTwo);
-	m_thief.addItem(&m_itemThree);*/
-
-
 	livesMessage.setFont(m_arialFont);
 	livesMessage.setPosition(sf::Vector2f{ 1300, 40 });
 	livesMessage.setCharacterSize(24);
-	livesMessage.setFillColor(sf::Color::White);
+	livesMessage.setFillColor(sf::Color::White);//player lives message
 
 	pointsMessage.setFont(m_arialFont);
 	pointsMessage.setPosition(sf::Vector2f{ 1300, 80 });
 	pointsMessage.setCharacterSize(24);
-	pointsMessage.setFillColor(sf::Color::White);
+	pointsMessage.setFillColor(sf::Color::White);//player points message
 
 	moneyMessage.setFont(m_arialFont);
 	moneyMessage.setPosition(sf::Vector2f{ 420, 400 });
 	moneyMessage.setCharacterSize(50);
-	moneyMessage.setFillColor(sf::Color::White);
+	moneyMessage.setFillColor(sf::Color::White);//win/money message
+
+	loseMessage.setFont(m_arialFont);
+	loseMessage.setPosition(sf::Vector2f{ 420,400 });
+	loseMessage.setCharacterSize(50);
+	loseMessage.setFillColor(sf::Color::White);//lose message
+
 
 #ifdef TEST_FPS
-
-
-
 
 	x_updateFPS.setFont(m_arialFont);
 	x_updateFPS.setPosition(sf::Vector2f{20.0f,300.0f});
@@ -146,7 +144,7 @@ void Game::processKeyPressed(const std::optional<sf::Event>& t_event)
 ////////////////////////////////////////////////////////////
 void Game::update(double dt)
 {
-	m_thief.update(dt);//updates the thief
+		m_thief.update(dt);//updates the thief
 	
 		m_guard.update(dt, m_thief.getPosition());//updates the guard
 		m_guardTwo.update(dt, m_thief.getPosition());
@@ -161,17 +159,20 @@ void Game::update(double dt)
 
 		m_itemOne.update(dt);
 		m_itemTwo.update(dt);
-		m_itemThree.update(dt);
+		m_itemThree.update(dt);//update the three boxes to stop thief from colliding
 
-		std::string livesMSG = "LIVES: " + std::to_string(m_thief.getLives());
+		std::string livesMSG = "LIVES: " + std::to_string(m_thief.getLives());// thief lives
 		livesMessage.setString(livesMSG);
 		
 
-		std::string pointsMSG = "POINTS: " + std::to_string(m_thief.getPoints());
+		std::string pointsMSG = "POINTS: " + std::to_string(m_thief.getPoints()); // thief points
 		pointsMessage.setString(pointsMSG);
 
-		std::string moneyMSG = "CONGRATS!!\nyou earned: \n$" + std::to_string(m_thief.getPoints()) + ",000";
+		std::string moneyMSG = "CONGRATS!!\nyou earned: \n$" + std::to_string(m_thief.getPoints()) + ",000"; // win message
 		moneyMessage.setString(moneyMSG);
+
+		std::string loseMSG = "You got caught";//lose message
+		loseMessage.setString(loseMSG);
 }
 
 
@@ -189,18 +190,18 @@ void Game::render()
 
 #endif
 
-	
-	m_thief.render(m_window);//draws the thief
-
 	if (m_thief.exit())
 	{
-		m_window.draw(moneyMessage);
+		m_window.draw(moneyMessage);//if the thief escapes they win
 	}
 
 	else if (m_thief.alive())
 	{
 		m_window.draw(livesMessage);//draws the thiefs lives
 		m_window.draw(pointsMessage);//draws the total points the thief has
+
+		m_thief.render(m_window);//draws the thief
+
 
 		m_guard.render(m_window);//draws the guards
 		m_guardTwo.render(m_window);
@@ -217,9 +218,11 @@ void Game::render()
 		m_itemThree.render(m_window);//draws the boxes holding the museme items
 
 	}
-	
-
-		
+	if (!m_thief.alive())//if the thief dies
+	{
+		m_window.draw(loseMessage);//if the thief dies the lose mesage is displayed
+	}
+			
 	m_window.display();	
 }
 

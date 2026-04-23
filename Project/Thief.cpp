@@ -9,39 +9,36 @@ Thief::Thief()
 
 void Thief::update(double dt)
 {
-	handleKeyInput();
-	boundChecking();
+	handleKeyInput();//key presses
+	boundChecking();//checks player bounds so it dosent go off screen
 }
 
 
 
-void Thief::initSprites()//gets the basic colours for the rectangle so i can visualise what is going on even without the proper sprite
+void Thief::initSprites()
 {
-	if (!m_thiefTexture.loadFromFile("ResourceFiles/Images/thief_crouch.png"))
+	if (!m_thiefTexture.loadFromFile("ResourceFiles/Images/thief_crouch.png"))//thief sprite
 	{
 		std::cout << "error loading thief sprite" << std::endl;
 	}
-	m_thief.setFillColor(sf::Color::Magenta);
 	
 	
-
-
-	m_thiefSprite = sf::Sprite{ m_thiefTexture };
-	m_thiefSprite.setTextureRect(sf::IntRect({ 15,3 }, { 30, 67 }));
-	m_thiefSprite.setScale(sf::Vector2f{ 2,2 });
-	m_thiefSprite.setPosition(sf::Vector2f{ 10,70 });
+	m_thiefSprite = sf::Sprite{ m_thiefTexture };//setting texture
+	m_thiefSprite.setTextureRect(sf::IntRect({ 15,3 }, { 30, 67 }));//getting specific sprite
+	m_thiefSprite.setScale(sf::Vector2f{ 2,2 });//setting scale
+	m_thiefSprite.setPosition(sf::Vector2f{ 10,70 });//setting position
 
 
 }
 void Thief::render(sf::RenderWindow& window)
 {
 	//window.draw(m_thief);
-	window.draw(m_thiefSprite);
+	window.draw(m_thiefSprite);//drawing sprite
 }
 
 void Thief::handleKeyInput()//gets the key inputs and moves it in the direction the player wants
 {
-	sf::Vector2f pos = m_thiefSprite.getPosition();
+	sf::Vector2f pos = m_thiefSprite.getPosition();//getting vector for position
 	
 
 	//	std::cout << "collliding" << std::endl;
@@ -64,71 +61,71 @@ void Thief::handleKeyInput()//gets the key inputs and moves it in the direction 
 
 		if (wallChecking())
 		{
-			m_thiefSprite.setPosition(pos);
+			m_thiefSprite.setPosition(pos);//setting the new position to the old one if sprite collides with wall so it dosent go into the wall
 		}
 	
-		for (Items* item : m_boxes)
+		for (Items* item : m_boxes)//goes through the items in the items class
 		{
-			if (item == nullptr) continue;
-			if (item->retCloakBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			if (item == nullptr) continue;//if the item is empty it moves onto the next one
+			if (item->retCloakBounds().findIntersection(m_thiefSprite.getGlobalBounds()))//checking if the item intersects with the thief
 			{
-				if (m_items->getCloakVisible())
+				if (m_items->getCloakVisible())//checks if item is visible
 				{
 					item->setCloakVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 			}
-			if (item->retCrownBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			if (item->retCrownBounds().findIntersection(m_thiefSprite.getGlobalBounds()))//checking if the item intersects with the thief
 			{
-				if (m_items->getCrownVisible())
+				if (m_items->getCrownVisible())//checks if item is visible
 				{
 					item->setCrownVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 			}
-			if (item->retJewlBounds().findIntersection(m_thiefSprite.getGlobalBounds()))
+			if (item->retJewlBounds().findIntersection(m_thiefSprite.getGlobalBounds()))//checking if the item intersects with the thief
 			{
-				if (m_items->getJewlVisible())
+				if (m_items->getJewlVisible())//checks if item is visible
 				{
 					item->setJewlVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 			}
-			if (item->retSignBounds().findIntersection(m_thiefSprite.getGlobalBounds()) )
+			if (item->retSignBounds().findIntersection(m_thiefSprite.getGlobalBounds()) )//checking if the item intersects with the thief
 			{
-				m_exit = true;
+				m_exit = true;//if thief intersects with exit sign game is over
 			}
-			if (item->retButBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getButVisible())
+			if (item->retButBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getButVisible())//checking if the item intersects with the thief
 			{
-				if (m_items->getButVisible())
+				if (m_items->getButVisible())//checks if item is visible
 				{
 					item->setButVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 
 			}
-			if (item->retBookBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getBookVisible())
+			if (item->retBookBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getBookVisible())//checking if the item intersects with the thief
 			{
-				if (m_items->getBookVisible())
+				if (m_items->getBookVisible())//checks if item is visible
 				{
 					item->setBookVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 			}
-			if (item->retHatBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getHatVisible())
+			if (item->retHatBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getHatVisible())//checking if the item intersects with the thief
 			{
-				if (m_items->getHatVisible())
+				if (m_items->getHatVisible())//checks if item is visible
 				{
 					item->setHatVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 			}
-			if (item->retWeaponsBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getWeaponsVisible())
+			if (item->retWeaponsBounds().findIntersection(m_thiefSprite.getGlobalBounds()) && m_items->getWeaponsVisible())//checking if the item intersects with the thief
 			{
-				if (m_items->getWeaponsVisible())
+				if (m_items->getWeaponsVisible())//checks if item is visible
 				{
 					item->setWeaponsVisible(false);//returns false to stop drawing the item in the items class
-					m_points += 5;
+					m_points += 5;//add points
 				}
 			}
 		}
@@ -146,27 +143,27 @@ sf::Vector2f Thief::getPosition() const//gets positon so we can use it in the ga
 	return m_thiefSprite.getPosition();
 }
 
-void Thief::boundChecking()
+void Thief::boundChecking()//checking the edge of the screen so the thief dosent go past it
 {
 
 	if (m_thiefSprite.getPosition().x <= 0)
 	{
-		m_thiefSprite.setPosition(sf::Vector2f{ 0, getPosition().y });
+		m_thiefSprite.setPosition(sf::Vector2f{ 0, getPosition().y });//left
 		
 	}
 	else if (m_thiefSprite.getPosition().x + 30 >= 1440)
 	{
-		m_thiefSprite.setPosition(sf::Vector2f{ 1410, getPosition().y });
+		m_thiefSprite.setPosition(sf::Vector2f{ 1410, getPosition().y });//right
 	}
 
 	else if (m_thiefSprite.getPosition().y <= 0)
 	{
-		m_thiefSprite.setPosition(sf::Vector2f{ getPosition().x, 0});
+		m_thiefSprite.setPosition(sf::Vector2f{ getPosition().x, 0});//top
 	}
 
 	else if (m_thiefSprite.getPosition().y + 70 >= 900)
 	{
-		m_thiefSprite.setPosition(sf::Vector2f{ getPosition().x, 830 });
+		m_thiefSprite.setPosition(sf::Vector2f{ getPosition().x, 830 });//bottom
 	}
 
 }
@@ -187,14 +184,14 @@ bool Thief::wallChecking()
 
 void Thief::setBox(Items* box)
 {
-	m_boxes.push_back(box);
+	m_boxes.push_back(box);//pushes thief back from item
 }
 
 bool Thief::alive()
 {
 	if (m_lives > 0)
 	{
-		m_alive = true;
+		m_alive = true;//if lives are greater than 0 thief is alive
 	}
 	else
 	{
@@ -204,13 +201,12 @@ bool Thief::alive()
 
 bool Thief::exit()
 {
-	return m_exit;
+	return m_exit;//if exit box had been intersected with
 }
 
-void Thief::loseLife(double dt)
+void Thief::loseLife(double dt)//looses thief life if guard intersects with it
 {
 	
-
 	m_timer += dt;
 
 	if (m_timer >= 3000)
@@ -222,21 +218,21 @@ void Thief::loseLife(double dt)
 
 }
 
-int Thief::getLives() const
+int Thief::getLives() const//gets lives to display on screen
 {
 	return m_lives;
 }
-int Thief::getPoints()
+int Thief::getPoints()//gets points to display on screen
 {
 	return m_points;
 }
 
-sf::FloatRect Thief::returnBounds()
+sf::FloatRect Thief::returnBounds()//returns player bounds
 {
 	return m_thiefSprite.getGlobalBounds();
 }
 
-void Thief::setItems(Items* items)
+void Thief::setItems(Items* items)//gets item player is checking through
 {
 	m_items = items;
 }

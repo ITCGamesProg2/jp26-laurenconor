@@ -21,7 +21,7 @@ public:
 
 	sf::FloatRect Items::returnGlobalBounds();
 
-
+	//gets bounds for each shape
 	sf::FloatRect retJewlBounds();
 	sf::FloatRect retCrownBounds();
 	sf::FloatRect retSignBounds();
@@ -31,7 +31,7 @@ public:
 	sf::FloatRect retHatBounds();
 	sf::FloatRect retWeaponsBounds();
 
-
+	//initialising bool for visible items
 	bool m_jewlVisible = true;
 	bool m_crownVisible = true;
 	bool m_signVisible = true;
@@ -41,6 +41,7 @@ public:
 	bool m_hatVisible = true;
 	bool m_weaponsVisible = true;
 
+	//sets bool for visible items
 	void setJewlVisible(bool jewlVisible);
 	void setCrownVisible(bool crownVisible);
 	void setSignVisible(bool spearVisible);
@@ -50,6 +51,7 @@ public:
 	void setHatVisible(bool hatVisible);
 	void setWeaponsVisible(bool weaponsVisible);
 
+	//gets bool for visible items
 	bool getJewlVisible() const;
 	bool getCrownVisible() const;
 	bool getSignVisible() const;
@@ -64,6 +66,7 @@ public:
 
 private:
 
+	//sprites and textures for each item
 	sf::Texture m_jewlText;
 	sf::Sprite m_jewlSprite{ m_jewlText };
 

@@ -16,68 +16,68 @@ void Items::initSprites(sf::Vector2f position)//gets the basic colours for the r
 {
 	m_box.setFillColor({ 153, 102, 51 });
 	m_box.setSize(sf::Vector2f{ 450,75 });
-	m_box.setPosition(sf::Vector2f{ position });
+	m_box.setPosition(sf::Vector2f{ position });//gets rectangle for the boxes
 
 
-	if (!m_jewlText.loadFromFile("ResourceFiles/Images/jewleryOne.png"))
+	if (!m_jewlText.loadFromFile("ResourceFiles/Images/jewleryOne.png"))//sets images for item
 	{
 		std::cout << "file not loading properly" << std::endl; 
 	}
-	m_jewlSprite.setPosition(sf::Vector2f{ 450,320 });
-	m_jewlSprite.setScale(sf::Vector2f{ 2, 2});
-	m_jewlSprite.setTexture( m_jewlText);
+	m_jewlSprite.setPosition(sf::Vector2f{ 450,320 });//sets position for item
+	m_jewlSprite.setScale(sf::Vector2f{ 2, 2});//sets scale for item
+	m_jewlSprite.setTexture( m_jewlText);//sets texture for item
 
-	if (!m_crownText.loadFromFile("ResourceFiles/Images/crown.png"))
+	if (!m_crownText.loadFromFile("ResourceFiles/Images/crown.png"))//sets images for item
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_crownSprite.setPosition(sf::Vector2f{ 300,330 });
-	m_crownSprite.setScale(sf::Vector2f{ 2, 2 });
-	m_crownSprite.setTexture(m_crownText);
+	m_crownSprite.setPosition(sf::Vector2f{ 300,330 });//sets position for item
+	m_crownSprite.setScale(sf::Vector2f{ 2, 2 });//sets scale for item
+	m_crownSprite.setTexture(m_crownText);//sets texture for item
 
 
-	if (!m_signText.loadFromFile("ResourceFiles/Images/sign.png"))
+	if (!m_signText.loadFromFile("ResourceFiles/Images/sign.png"))//sets images for item
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_signSprite.setPosition(sf::Vector2f{ 1300,800 });
-	m_signSprite.setTexture(m_signText);
+	m_signSprite.setPosition(sf::Vector2f{ 1300,800 });//sets position for item
+	m_signSprite.setTexture(m_signText);//sets texture for item
 
-	if (!m_cloakText.loadFromFile("ResourceFiles/Images/cloak.png"))
+	if (!m_cloakText.loadFromFile("ResourceFiles/Images/cloak.png"))//sets images for item
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_cloakSprite.setPosition(sf::Vector2f{ 120,330 });
-	m_cloakSprite.setTexture(m_cloakText);
+	m_cloakSprite.setPosition(sf::Vector2f{ 120,330 });//sets position for item
+	m_cloakSprite.setTexture(m_cloakText);//sets texture for item
 
-	if (!m_butterfliesText.loadFromFile("ResourceFiles/Images/butterflies.png"))
+	if (!m_butterfliesText.loadFromFile("ResourceFiles/Images/butterflies.png"))//sets images for item
 	{
 		std::cout << "file not loading properly" << std::endl;
 	}
-	m_butterfliesSprite.setPosition(sf::Vector2f{ 820,170 });
-	m_butterfliesSprite.setScale(sf::Vector2f{ 1.5, 1.5 });
-	m_butterfliesSprite.setTexture(m_butterfliesText);
+	m_butterfliesSprite.setPosition(sf::Vector2f{ 820,170 });//sets position for item
+	m_butterfliesSprite.setScale(sf::Vector2f{ 1.5, 1.5 });//sets scale for item
+	m_butterfliesSprite.setTexture(m_butterfliesText);//sets texture for item
 
-	if (!m_bookText.loadFromFile("ResourceFiles/Images/book.png"))
+	if (!m_bookText.loadFromFile("ResourceFiles/Images/book.png"))//sets images for item
 	{
 		std::cout << "book not loading properly" << std::endl;
 	}
-	m_bookSprite.setPosition(sf::Vector2f(990, 150));
-	m_bookSprite.setTexture(m_bookText);
+	m_bookSprite.setPosition(sf::Vector2f(990, 150));//sets position for item
+	m_bookSprite.setTexture(m_bookText);//sets texture for item
 
-	if (!m_hatText.loadFromFile("ResourceFiles/Images/hat.png"))
+	if (!m_hatText.loadFromFile("ResourceFiles/Images/hat.png"))//sets images for item
 	{
 		std::cout << "hat not loading properly" << std::endl;
 	}
-	m_hatSprite.setPosition(sf::Vector2f(450, 650));
-	m_hatSprite.setTexture(m_hatText);
+	m_hatSprite.setPosition(sf::Vector2f(450, 650));//sets position for item
+	m_hatSprite.setTexture(m_hatText);//sets texture for item
 
-	if (!m_weaponsText.loadFromFile("ResourceFiles/Images/weapons.png"))
+	if (!m_weaponsText.loadFromFile("ResourceFiles/Images/weapons.png"))//sets images for item
 	{
 		std::cout << "weapons not loading properly" << std::endl;
 	}
-	m_weaponsSprite.setPosition(sf::Vector2f(650, 650));
-	m_weaponsSprite.setTexture(m_weaponsText);
+	m_weaponsSprite.setPosition(sf::Vector2f(650, 650));//sets position for item
+	m_weaponsSprite.setTexture(m_weaponsText);//sets texture for item
 
 }
 
@@ -105,17 +105,17 @@ void Items::render(sf::RenderWindow& window)
 	{
 		window.draw(m_butterfliesSprite);//draws sprite
 	}
-	if(m_bookVisible)
+	if(m_bookVisible)// if item is alive/ player has not intersected
 	{
-		window.draw(m_bookSprite);
+		window.draw(m_bookSprite);//draws sprite
 	}
-	if (m_hatVisible)
+	if (m_hatVisible)// if item is alive/ player has not intersected
 	{
-		window.draw(m_hatSprite);
+		window.draw(m_hatSprite);//draws sprite
 	}
-	if (m_weaponsVisible)
+	if (m_weaponsVisible)// if item is alive/ player has not intersected
 	{
-		window.draw(m_weaponsSprite);
+		window.draw(m_weaponsSprite);//draws sprite
 	}
 
 }
@@ -132,7 +132,7 @@ sf::Vector2f Items::getPosition() const//gets positon so we can use it in the ga
 	return m_box.getPosition();
 }
 
-sf::FloatRect Items::returnGlobalBounds()
+sf::FloatRect Items::returnGlobalBounds()//return bounds for collision checking
 {
 	return m_box.getGlobalBounds();
 }

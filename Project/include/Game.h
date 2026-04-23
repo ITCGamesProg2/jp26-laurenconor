@@ -86,15 +86,16 @@ protected:
 	sf::Font m_arialFont;
 	// main window
 	sf::RenderWindow m_window;
-	Thief m_thief;
+	Thief m_thief;//initialising thief
 	Guard m_guard{ sf::Vector2f{600,70}, GuardDirection::LEFT,GuardMovement::LEFTRIGHT };
 	Guard m_guardTwo{ sf::Vector2f{1300,400}, GuardDirection::DOWN ,GuardMovement::UPDOWN };
-	Guard m_guardThree{ sf::Vector2f{100,600}, GuardDirection::LEFT ,GuardMovement::LEFTRIGHT };
+	Guard m_guardThree{ sf::Vector2f{100,600}, GuardDirection::LEFT ,GuardMovement::LEFTRIGHT };//initialising guards
 
-	ScentTrail m_scentTrail;
+	ScentTrail m_scentTrail;//scent trail for thief
+
 	VisionCone m_cone{ m_guard, m_scentTrail, m_thief };
 	VisionCone m_coneTwo{ m_guardTwo ,m_scentTrail,m_thief };
-	VisionCone m_coneThree{ m_guardThree, m_scentTrail, m_thief };
+	VisionCone m_coneThree{ m_guardThree, m_scentTrail, m_thief };//vision cones for each guard
 	
 	Items  m_itemOne{ sf::Vector2f{ 650,175 }};//top box
 	Items  m_itemTwo{ sf::Vector2f{ 100,350 } };//middle bod
@@ -106,7 +107,7 @@ protected:
 	sf::Text livesMessage{ m_arialFont };
 	sf::Text pointsMessage{ m_arialFont };
 	sf::Text moneyMessage{ m_arialFont };
-
+	sf::Text loseMessage{ m_arialFont };//set text messages
 
 	sf::Text x_updateFPS{ m_arialFont };	// text used to display updates per second.
 	sf::Text x_drawFPS{ m_arialFont };		// text used to display draw calls per second.

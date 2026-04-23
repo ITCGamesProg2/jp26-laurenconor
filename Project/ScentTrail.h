@@ -16,7 +16,7 @@ public:
 	bool intersects(const sf::FloatRect& rect) const;
 
 
-	float retAlpha();
+	
 	
 
 private:

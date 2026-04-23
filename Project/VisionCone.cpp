@@ -10,10 +10,10 @@ VisionCone::VisionCone(Guard & guard, ScentTrail& trail, Thief& thief) : m_guard
 
 void VisionCone::update(double dt, sf::Vector2f guardPos, GuardDirection dir)
 {
-		checkCollision(dt);
+		checkCollision(dt);//chacks collision with scent trail
 		handleCollision();//changes st
 		
-		if (m_state == VisionState::SEARCHING || m_state == VisionState::ALERT)
+		if (m_state == VisionState::SEARCHING || m_state == VisionState::ALERT)//updates cone based on the guards position and angle to player 
 		{
 			updateConeDirection(guardPos, directionToAngle(dir));
 		}
@@ -49,16 +49,16 @@ float VisionCone::directionToAngle(GuardDirection dir)
 	switch (dir)
 	{
 	case GuardDirection::LEFT:
-		return  (180 - (fieldOfView / 2.0f));
+		return  (180 - (fieldOfView / 2.0f));//points cone left
 		break;
 	case GuardDirection::RIGHT:
-		return  (0 - (fieldOfView / 2.0f));
+		return  (0 - (fieldOfView / 2.0f));//points cone right
 		break;
 	case GuardDirection::DOWN:
-		return (90 - (fieldOfView / 2.0f));
+		return (90 - (fieldOfView / 2.0f));//points cone down
 		break;
 	case GuardDirection::UP:
-		return (270 - (fieldOfView / 2.0f));
+		return (270 - (fieldOfView / 2.0f));//points cone up
 		break;
 	}
 	return 0.0f;
@@ -67,51 +67,51 @@ float VisionCone::directionToAngle(GuardDirection dir)
 void VisionCone::initCone(sf::Vector2f guardPos, GuardDirection dir,float startingAngle)
 {
 	
-	updateConeDirection(guardPos, directionToAngle(dir));
+	updateConeDirection(guardPos, directionToAngle(dir));//draws the cone in the position guard is facing
 		
 }
 
-void VisionCone::render(sf::RenderWindow& window)
+void VisionCone::render(sf::RenderWindow& window)//draws cone on screen
 {
 	window.draw(m_cone);
 }
 
-bool VisionCone::trailCollision()
+bool VisionCone::trailCollision()//if cone intersects with the trail
 {
 	return m_trail.intersects(m_cone.getBounds());
 }
 
-void VisionCone::handleCollision()
+void VisionCone::handleCollision()//if collision
 {
-	if (m_state == VisionState::SEARCHING)
+	if (m_state == VisionState::SEARCHING)//no collision with thief
 	{
-		m_color = { 102,255,102,155 };
+		m_color = { 102,255,102,155 };//colour is green
 	}
-	else if (m_state == VisionState::ALERT)
+	else if (m_state == VisionState::ALERT)//scent trail is colliding with cone
 	{
-		m_color = { 255,255,102,155 };
+		m_color = { 255,255,102,155 };//colour is yelllow
 	}
-	else if (m_state == VisionState::PERSUING)
+	else if (m_state == VisionState::PERSUING)//scent trail is colliding with guard
 	{
-		m_color = { 255,152,102,155 };
+		m_color = { 255,152,102,155 };//colour is orange 
 	}
-	else if(m_state == VisionState::ATTACKING)
+	else if(m_state == VisionState::ATTACKING)//thief and guard collision
 	{ 
-		m_color = { 255,0,0,155 };
+		m_color = { 255,0,0,155 };//colour is red
 	}
 }
 
-void VisionCone::checkCollision(double dt)
+void VisionCone::checkCollision(double dt)//checks collision
 {
-	m_state = VisionState::SEARCHING;
-	m_guard.setChasing(false);
+	m_state = VisionState::SEARCHING;//if no collison set to searching
+	m_guard.setChasing(false);//set chasing set to false
 
-	if (trailCollision())
+	if (trailCollision())//scent trail is colliding with cone
 	{
 		m_state = VisionState::ALERT;
 		
 	}
-	if (m_trail.intersects(m_guard.returnBounds()))
+	if (m_trail.intersects(m_guard.returnBounds()))//scent trail is colliding with guard
 	{
 		m_guard.setChasing(true);
 		m_state = VisionState::PERSUING;
@@ -128,7 +128,7 @@ void VisionCone::checkCollision(double dt)
 	else {
 		m_guard.setChasing(false);
 	}
-	if (m_guard.intersects(m_thief.returnBounds()))
+	if (m_guard.intersects(m_thief.returnBounds()))//thief and guard collision
 	{
 		m_state = VisionState::ATTACKING;
 		m_thief.loseLife(dt);

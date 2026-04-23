@@ -64,7 +64,7 @@ bool ScentTrail::intersects(const sf::FloatRect& rect) const
 	{
 		//std::cout << "for loop" << std::endl;
 		if (m_particles[parNum].getFillColor().a == 0)
-		{	
+		{
 			continue;
 		}
 		if (m_particles[parNum].getGlobalBounds().findIntersection(rect))
@@ -72,20 +72,11 @@ bool ScentTrail::intersects(const sf::FloatRect& rect) const
 			//std::cout << "there is collision Checking" << std::endl;
 			return true;
 		}
-
 	}
-	
 	return false;
 }
 
-float ScentTrail::retAlpha()
-{
-	for (int parNum = 0; parNum < TOTAL_PARTICLES; parNum++)
-	{
-		alpha = m_particles[parNum].getFillColor().a;
-	}
-	return alpha;
-}
+
 
 
 

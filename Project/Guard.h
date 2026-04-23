@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum class GuardDirection {LEFT,RIGHT,UP,DOWN};
-enum class GuardMovement{LEFTRIGHT, UPDOWN};
+enum class GuardDirection {LEFT,RIGHT,UP,DOWN};//enums for the direction guard is facing
+enum class GuardMovement{LEFTRIGHT, UPDOWN};//enums for the direction guard is moving
 class Guard
 {
 public:
@@ -10,9 +10,9 @@ public:
 
 	Guard(sf::Vector2f startPos = sf::Vector2f{ 600,70 }, GuardDirection startDir = GuardDirection::LEFT, GuardMovement movement = GuardMovement::LEFTRIGHT);
 	
-	void Guard::update(double dt, sf::Vector2f thiefPos);//updates the thief
+	void Guard::update(double dt, sf::Vector2f thiefPos);//updates the guard, dt and thief position if colliding
 
-	GuardDirection getDirection() const {
+	GuardDirection getDirection() const {//returns direction guard is facing
 		return m_direction;
 	};
 
@@ -32,7 +32,7 @@ public:
 	void setPosition(sf::Vector2f t_position);
 	sf::Vector2f getPosition() const;
 
-	sf::FloatRect Guard::returnBounds();
+	sf::FloatRect Guard::returnBounds();//returns bounds for collision checking
 
 	bool Guard::intersects(const sf::FloatRect& rect) const;
 
@@ -45,10 +45,10 @@ void boundaryChecking();
 
 private:
 	
-	bool left = true;
+	bool left = true;//bools for direction
 	bool down = true;
 
-	bool m_isChasing = false;
+	bool m_isChasing = false;//if chasing thief set to false unless sprite trail intersects with guard
 
 	GuardDirection m_direction;//initalises the direction to left
 	GuardMovement m_movement;//direction guard moves
@@ -57,6 +57,6 @@ private:
 	sf::RectangleShape m_guard;//gets the basic rectangle shape
 
 	sf::Texture m_guardTexture;
-	sf::Sprite m_guardSprite{ m_guardTexture };
+	sf::Sprite m_guardSprite{ m_guardTexture };//intialises guards sprite and texture
 };
 

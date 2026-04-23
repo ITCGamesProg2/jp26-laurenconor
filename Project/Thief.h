@@ -23,32 +23,32 @@ public:
 	bool wallChecking();
 	void setBox(Items* box);
 
-	bool alive();
+	bool alive();//returns alive
 	bool m_alive = true;
-	bool exit();
+	bool exit();//returns exit if player collides with exit sign
 	bool m_exit = false;
 	
-	void loseLife(double dt);
-	int getLives() const;
+	void loseLife(double dt);//looses lives when colliding with guard
+	int getLives() const;//gets lives to return to game class for livesMessage
 
-	sf::FloatRect Thief::returnBounds();
+	sf::FloatRect Thief::returnBounds();//returns bounds for collision checking
 	
-	float const TOTAL_LIVES = 3;
-	float m_lives = TOTAL_LIVES;
-	float m_timer{ 0.0f };
+	float const TOTAL_LIVES = 3;//const for total lives
+	float m_lives = TOTAL_LIVES;//sets total lives
+	float m_timer{ 0.0f };//timer
 
-	void setItems(Items* items);
+	void setItems(Items* items);//checks through the items in the items class
 
-	int getPoints();
+	int getPoints();//get points when collides with items
 
 	sf::Texture m_thiefTexture;
-	sf::Sprite m_thiefSprite{ m_thiefTexture };
+	sf::Sprite m_thiefSprite{ m_thiefTexture };//sets the texture and sprite for the thief
 
 private:
 
-	int m_points = 0;
+	int m_points = 0;//initalises points for thief
 
-	std::vector<Items*> m_boxes;
+	std::vector<Items*> m_boxes;//vector for the items thief has to check through
 
 	Items* m_items;//{nullptr}
 	double m_speed{ 0.0f };//speed for thief
